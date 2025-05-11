@@ -5,7 +5,7 @@ export default function VerticalNav() {
     <nav className="fixed top-8 left-8 z-50 hidden md:block">
       <ul className="flex flex-col space-y-6 text-sm font-light">
         <li className="transform transition-all duration-300 hover:translate-x-4 hover:scale-110">
-          <Link href="#home" className="text-white hover:text-white/80 transition-colors tracking-widest text-lg md:text-sm">
+          <Link href="#home" className="text-white hover:text-white/80 transition-colors tracking-widest text-lg md:text-xl">
             INA&apos;S LOUNGE
           </Link>
         </li>
