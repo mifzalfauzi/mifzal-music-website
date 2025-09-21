@@ -5,33 +5,25 @@ import { Calendar, Clock, Music } from "lucide-react"
 
 const upcomingReleases = [
   {
-    title: "Ethereal Nocturne",
+    title: "Sapphire",
     type: "Single",
-    expectedDate: "Q1 2025",
+    expectedDate: "TBC",
     status: "In Production",
-    description: "A haunting piano composition exploring the liminal space between dreams and reality.",
-    genre: "Neo-Classical",
-    duration: "~5:30",
+    description: "A cinematic, progressive guitar-driven track that blends atmospheric textures with melodic phrasing. Inspired by modern instrumentalists such as Plini and David Maxim Micic.",
+    genre: "Ambient Rock",
+    duration: "~4:10",
   },
   {
-    title: "Temporal Fragments",
-    type: "EP",
-    expectedDate: "Spring 2025",
-    status: "Writing",
-    description: "A collection of experimental pieces capturing fleeting moments in time.",
-    genre: "Ambient/Classical",
-    duration: "~18:00",
-    tracks: ["Fragment I", "Fragment II", "Fragment III", "Fragment IV"]
+    title: "Tales of Sapphire",
+    type: "Multi-track Single",
+    expectedDate: "TBC",
+    status: "In Production",
+    description: "An instrumental progressive track blending cinematic textures, melodic guitar work, and neoclassical influences. Consists of three tracks, one main single (Sapphire : A-side) and two supporting B-sides (Pieces of A Vague Ceremony & Vita). In which exists together as a conceptual suite version that flows seamlessly from start to finish.",
+    genre: "Progressive/Orchestral",
+    duration: "~9:00",
+    tracks: ["Sapphire", "Pieces of A Vague Ceremony", "Vita"]
   },
-  {
-    title: "Metamorphosis Suite",
-    type: "Album",
-    expectedDate: "Late 2025",
-    status: "Conceptual",
-    description: "An ambitious full-length work exploring themes of transformation and growth.",
-    genre: "Contemporary Classical",
-    duration: "~45:00",
-  },
+ 
 ]
 
 const statusColors = {
@@ -45,69 +37,53 @@ export default function UpcomingMusic() {
     <div className="container mx-auto px-4">
       <h2 className="text-3xl font-light mb-12 text-center tracking-wider">UPCOMING RELEASES</h2>
       
-      <div className="max-w-4xl mx-auto space-y-6">
+      <div className="max-w-3xl mx-auto space-y-8">
         {upcomingReleases.map((release, index) => (
-          <div 
-            key={index} 
-            className="bg-card rounded-lg border border-border p-6 hover:shadow-lg transition-all duration-300 hover:border-foreground/20"
-          >
-            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-              <div className="flex-1">
-                <div className="flex items-start gap-3 mb-3">
-                  <Music className="w-5 h-5 mt-1 text-muted-foreground" />
-                  <div>
-                    <h3 className="text-xl font-medium mb-1">{release.title}</h3>
-                    <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                      <span className="font-medium">{release.type}</span>
-                      <span>•</span>
-                      <span>{release.genre}</span>
-                    </div>
-                  </div>
-                </div>
-                
-                <p className="text-muted-foreground mb-4 leading-relaxed">
-                  {release.description}
-                </p>
-                
-                {/* {release.tracks && (
-                  <div className="mb-4">
-                    <p className="text-sm font-medium mb-2 text-muted-foreground">Track List:</p>
-                    <div className="grid grid-cols-2 gap-2">
-                      {release.tracks.map((track, trackIndex) => (
-                        <span key={trackIndex} className="text-sm text-muted-foreground">
-                          {trackIndex + 1}. {track}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )} */}
-              </div>
-              
-              <div className="flex flex-col items-end gap-3 min-w-[200px]">
-                <span 
-                  className={`px-3 py-1 rounded-full text-xs font-medium ${statusColors[release.status as keyof typeof statusColors] || ""}`}
-                >
-                  {release.status}
-                </span>
-                <div className="text-right space-y-2">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Calendar className="w-4 h-4" />
-                    <span>{release.expectedDate}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Clock className="w-4 h-4" />
-                    <span>{release.duration}</span>
-                  </div>
+          <div key={index} className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-xl font-light tracking-wide">{release.title}</h3>
+                <div className="flex items-center gap-3 text-sm text-muted-foreground mt-1">
+                  <span>{release.type}</span>
+                  <span>•</span>
+                  <span>{release.genre}</span>
+                  <span>•</span>
+                  <span>{release.expectedDate}</span>
                 </div>
               </div>
+              <span 
+                className={`px-3 py-1 rounded-full text-xs font-medium ${statusColors[release.status as keyof typeof statusColors] || ""}`}
+              >
+                {release.status}
+              </span>
             </div>
+            
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              {release.description}
+            </p>
+            
+            {release.tracks && (
+              <div className="space-y-2">
+                {release.tracks.map((track, trackIndex) => (
+                  <div key={trackIndex} className="flex items-center justify-between py-2 border-b border-border/50 last:border-0">
+                    <span className="text-sm text-muted-foreground">
+                      {String(trackIndex + 1).padStart(2, '0')}. {track}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
+            
+            {index < upcomingReleases.length - 1 && (
+              <div className="pt-6 border-b border-border"></div>
+            )}
           </div>
         ))}
       </div>
       
       <div className="text-center mt-12">
         <p className="text-muted-foreground text-sm">
-          Release dates are subject to change. Follow for updates on new releases.
+          Release dates are subject to change.
         </p>
       </div>
     </div>

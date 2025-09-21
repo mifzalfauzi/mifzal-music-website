@@ -13,8 +13,8 @@ export default function MobileNav() {
   return (
     <div className="md:hidden fixed top-0 left-0 right-0 z-50 bg-transparent">
       <div className="flex justify-between items-center p-4">
-        <Link href="#home" className="text-xl font-medium text-white">
-          Ina&apos;s Lounge
+        <Link href="#home" className="text-xl font-light text-white">
+          MIFZAL
         </Link>
 
         <div className="flex items-center space-x-2">

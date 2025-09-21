@@ -9,7 +9,7 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-muted-foreground mb-4 md:mb-0">
-            &copy; {currentYear} Ina&apos;s Lounge. All rights reserved.
+            &copy; {currentYear} Mifzal. All rights reserved.
           </p>
 
           {/* <div className="flex space-x-6 md:hidden">

@@ -6,21 +6,7 @@ import { Play, ChevronLeft, ChevronRight, Music as MusicIcon, Youtube } from "lu
 import { Button } from "@/components/ui/button"
 
 const musicReleases = [
-  {
-    title: "Vita",
-    type: "Single",
-    year: "2023",
-    cover: "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02590377c4b00634518a7cc5ff",
-    spotifyUrl: "https://open.spotify.com/",
-    appleMusicUrl: "https://music.apple.com/",
-    bandcampUrl: "https://bandcamp.com/",
-    youtubeUrl: "https://www.youtube.com/watch?v=1xo4cAMxixCp0ml4ZYeTEM",
-    spotifyEmbedId: "1xo4cAMxixCp0ml4ZYeTEM", // Add your Spotify track/album ID here
-    isReleased: true,
-    tracks: [
-      { title: "Vita", duration: "4:05" },
-    ],
-  },
+  
   {
     title: "Intervallum",
     type: "Single",
@@ -34,6 +20,22 @@ const musicReleases = [
     isReleased: true,
     tracks: [
       { title: "Intervallum", duration: "4:05" },
+    ],
+  },
+
+  {
+    title: "Vita",
+    type: "Single",
+    year: "2023",
+    cover: "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02590377c4b00634518a7cc5ff",
+    spotifyUrl: "https://open.spotify.com/",
+    appleMusicUrl: "https://music.apple.com/",
+    bandcampUrl: "https://bandcamp.com/",
+    youtubeUrl: "https://www.youtube.com/watch?v=1xo4cAMxixCp0ml4ZYeTEM",
+    spotifyEmbedId: "1xo4cAMxixCp0ml4ZYeTEM", // Add your Spotify track/album ID here
+    isReleased: true,
+    tracks: [
+      { title: "Vita", duration: "4:05" },
     ],
   },
   
@@ -69,9 +71,23 @@ const musicReleases = [
 ]
 
 export default function Music() {
-  const [activeIndex, setActiveIndex] = useState(0)
+  // Calculate initial index based on track count
+  const getInitialIndex = () => {
+    const totalTracks = musicReleases.length
+    if (totalTracks % 2 === 1) {
+      // Odd number: middle position
+      return Math.floor(totalTracks / 2)
+    } else {
+      // Even number: lower of the two middle positions
+      return Math.floor(totalTracks / 2) - 1
+    }
+  }
+
+  const [activeIndex, setActiveIndex] = useState(getInitialIndex())
   const [isPaused, setIsPaused] = useState(false)
   const [isTransitioning, setIsTransitioning] = useState(false)
+  const [touchStart, setTouchStart] = useState(0)
+  const [touchEnd, setTouchEnd] = useState(0)
 
   // Get indexes of cards to the left and right of the active card
   const getPrevIndex = () => {
@@ -120,34 +136,59 @@ export default function Music() {
   // Pause automatic cycling on hover or touch
   const handleMouseEnter = () => setIsPaused(true)
   const handleMouseLeave = () => setIsPaused(false)
-  const handleTouchStart = () => setIsPaused(true)
-  const handleTouchEnd = () => setIsPaused(false)
+
+  // Touch/swipe handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setIsPaused(true)
+    setTouchEnd(0) // Reset touch end
+    setTouchStart(e.targetTouches[0].clientX)
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX)
+  }
+
+  const handleTouchEnd = () => {
+    setIsPaused(false)
+    if (!touchStart || !touchEnd) return
+    
+    const distance = touchStart - touchEnd
+    const isLeftSwipe = distance > 50
+    const isRightSwipe = distance < -50
+
+    if (isLeftSwipe && activeIndex < musicReleases.length - 1) {
+      showNextRelease()
+    }
+    if (isRightSwipe && activeIndex > 0) {
+      showPrevRelease()
+    }
+  }
 
   return (
     <div className="container mx-auto px-4">
       <h2 className="text-3xl font-light mb-12 text-center tracking-wider">MUSIC</h2>
 
       <div className="relative max-w-7xl mx-auto">
-        {/* Navigation arrows */}
-        {/* {activeIndex !== 0 && (
+        {/* Navigation arrows for mobile/tablet */}
+        {activeIndex !== 0 && (
           <button
             onClick={showPrevRelease}
-            className="absolute cursor-pointer top-1/2 -translate-y-1/2 z-10 bg-background/80 dark:bg-background/60 rounded-full p-2 shadow-md"
+            className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 bg-background/90 hover:bg-background border border-border rounded-full p-2 shadow-lg md:hidden"
             aria-label="Previous release"
           >
-            <ChevronLeft size={24} />
+            <ChevronLeft size={20} />
           </button>
         )}
 
         {activeIndex !== musicReleases.length - 1 && (
           <button
             onClick={showNextRelease}
-            className="absolute cursor-pointer right-4 top-1/2 -translate-y-1/2 z-10 bg-background/80 dark:bg-background/60 rounded-full p-2 shadow-md"
+            className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-20 bg-background/90 hover:bg-background border border-border rounded-full p-2 shadow-lg md:hidden"
             aria-label="Next release"
           >
-            <ChevronRight size={24} />
+            <ChevronRight size={20} />
           </button>
-        )} */}
+        )}
 
         {/* Carousel with centered active card and smaller side cards */}
         <div
@@ -155,6 +196,7 @@ export default function Music() {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
           {/* Previous card (smaller) - only show if not on first track */}
@@ -370,7 +412,7 @@ export default function Music() {
               setActiveIndex(index);
               setTimeout(() => setIsTransitioning(false), 300);
             }}
-            className={`w-2 h-2 rounded-full transition-colors duration-300 ${index === activeIndex ? "bg-foreground" : "bg-muted-foreground/30"
+            className={`w-2 h-2 rounded-full cursor-pointer transition-colors duration-300 ${index === activeIndex ? "bg-foreground" : "bg-muted-foreground/30"
               }`}
             aria-label={`Go to release ${index + 1}`}
           />
