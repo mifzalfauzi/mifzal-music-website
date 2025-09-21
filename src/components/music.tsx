@@ -7,21 +7,6 @@ import { Button } from "@/components/ui/button"
 
 const musicReleases = [
   {
-    title: "Intervallum",
-    type: "Single",
-    year: "2023",
-    cover: "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02a095dbc29c017745bcb14714  ",
-    spotifyUrl: "https://open.spotify.com/",
-    appleMusicUrl: "https://music.apple.com/",
-    bandcampUrl: "https://bandcamp.com/",
-    youtubeUrl: "https://www.youtube.com/watch?v=4TbPxJ5jUspuAN8sUZQSCs",
-    spotifyEmbedId: "4TbPxJ5jUspuAN8sUZQSCs", // Add your Spotify track/album ID here
-    isReleased: true,
-    tracks: [
-      { title: "Intervallum", duration: "4:05" },
-    ],
-  },
-  {
     title: "Vita",
     type: "Single",
     year: "2023",
@@ -36,6 +21,22 @@ const musicReleases = [
       { title: "Vita", duration: "4:05" },
     ],
   },
+  {
+    title: "Intervallum",
+    type: "Single",
+    year: "2023",
+    cover: "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02a095dbc29c017745bcb14714  ",
+    spotifyUrl: "https://open.spotify.com/",
+    appleMusicUrl: "https://music.apple.com/",
+    bandcampUrl: "https://bandcamp.com/",
+    youtubeUrl: "https://www.youtube.com/watch?v=4TbPxJ5jUspuAN8sUZQSCs",
+    spotifyEmbedId: "4TbPxJ5jUspuAN8sUZQSCs", // Add your Spotify track/album ID here
+    isReleased: true,
+    tracks: [
+      { title: "Intervallum", duration: "4:05" },
+    ],
+  },
+  
   {
     title: "Casia",
     type: "Single",
