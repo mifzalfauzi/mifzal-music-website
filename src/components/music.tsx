@@ -38,50 +38,20 @@ const musicReleases = [
   },
   
   {
-    title: "Casia",
-    type: "Single",
+    title: "Leocasia",
+    type: "Multi-track Single",
     year: "2023",
     cover: "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0228f2b587dfb595dbb5830547",
     spotifyUrl: "https://open.spotify.com/",
     appleMusicUrl: "https://music.apple.com/",
     bandcampUrl: "https://bandcamp.com/",
     youtubeUrl: "https://www.youtube.com/watch?v=5Unfq5dxYK013BQzsCNoJQ",
-    spotifyEmbedId: "5Unfq5dxYK013BQzsCNoJQ", // Add your Spotify track/album ID here
+    spotifyEmbedId: "2rVkgIahZhBbeEPsqQLkwr", // Add your Spotify track/album ID here
     isReleased: true,
     tracks: [
-      { title: "Casia", duration: "4:05" },
+      { title: "Leocasia", duration: "4:05" },
     ],
-  },
-  {
-    title: "August Op.6",
-    type: "Single",
-    year: "2023",
-    cover: "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0228f2b587dfb595dbb5830547",
-    spotifyUrl: "https://open.spotify.com/",
-    appleMusicUrl: "https://music.apple.com/",
-    bandcampUrl: "https://bandcamp.com/",
-    youtubeUrl: "https://www.youtube.com/watch?v=3z2eCytxrj6GuCeTau880O",
-    spotifyEmbedId: "3z2eCytxrj6GuCeTau880O", // Add your Spotify track/album ID here
-    isReleased: true,
-    tracks: [
-      { title: "August Op.6", duration: "4:15" }
-    ],
-  },
-  {
-    title: "Leo",
-    type: "Single",
-    year: "2023",
-    cover: "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0228f2b587dfb595dbb5830547",
-    spotifyUrl: "https://open.spotify.com/",
-    appleMusicUrl: "https://music.apple.com/",
-    bandcampUrl: "https://bandcamp.com/",
-    youtubeUrl: "https://www.youtube.com/watch?v=22mxmfBYaBZz67Wp0TMhwv",
-    spotifyEmbedId: "22mxmfBYaBZz67Wp0TMhwv", // Add your Spotify track/album ID here
-    isReleased: true,
-    tracks: [
-      { title: "Leo", duration: "4:15" }
-    ],
-  },
+  }
   // Adding a third release helps test the consistency of transitions
   // {
   //   title: "Upcoming",
@@ -231,13 +201,18 @@ export default function Music() {
             className="w-full md:w-2/4 z-10 transition-all duration-300 transform"
           >
             <div className="bg-card rounded-xl shadow-lg overflow-hidden border border-border">
-              <div className="relative h-0 pb-[70%]">
+              <div className="relative h-0"
+  style={{
+    paddingBottom: musicReleases[activeIndex].type === "Single" ? "70%" : "75%",
+  }}>
                 {musicReleases[activeIndex].isReleased && musicReleases[activeIndex].spotifyEmbedId ? (
                   <iframe
                     style={{ borderRadius: "13px" }}
-                    src={`https://open.spotify.com/embed/track/${musicReleases[activeIndex].spotifyEmbedId}?utm_source=generator&theme=0`}
+                    src={`https://open.spotify.com/embed/${
+                      musicReleases[activeIndex].type !== "Single" ? "album" : "track"
+                    }/${musicReleases[activeIndex].spotifyEmbedId}?utm_source=generator&theme=0`}
                     width="100%"
-                    height="352"
+                    height={musicReleases[activeIndex].type === "Single" ? 352 : 370}
                     frameBorder="0"
                     allowFullScreen
                     allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
