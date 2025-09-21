@@ -111,21 +111,25 @@ export default function Music() {
 
       <div className="relative max-w-7xl mx-auto">
         {/* Navigation arrows */}
-        <button
-          onClick={showPrevRelease}
-          className="absolute top-1/2 -translate-y-1/2 z-10 bg-background/80 dark:bg-background/60 rounded-full p-2 shadow-md"
-          aria-label="Previous release"
-        >
-          <ChevronLeft size={24} />
-        </button>
+        {/* {activeIndex !== 0 && (
+          <button
+            onClick={showPrevRelease}
+            className="absolute cursor-pointer top-1/2 -translate-y-1/2 z-10 bg-background/80 dark:bg-background/60 rounded-full p-2 shadow-md"
+            aria-label="Previous release"
+          >
+            <ChevronLeft size={24} />
+          </button>
+        )}
 
-        <button
-          onClick={showNextRelease}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-background/80 dark:bg-background/60 rounded-full p-2 shadow-md"
-          aria-label="Next release"
-        >
-          <ChevronRight size={24} />
-        </button>
+        {activeIndex !== musicReleases.length - 1 && (
+          <button
+            onClick={showNextRelease}
+            className="absolute cursor-pointer right-4 top-1/2 -translate-y-1/2 z-10 bg-background/80 dark:bg-background/60 rounded-full p-2 shadow-md"
+            aria-label="Next release"
+          >
+            <ChevronRight size={24} />
+          </button>
+        )} */}
 
         {/* Carousel with centered active card and smaller side cards */}
         <div 
@@ -135,19 +139,21 @@ export default function Music() {
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
-          {/* Previous card (smaller) */}
-          <div 
-            key={`prev-card-${getPrevIndex()}`}
-            className="hidden md:block w-1/3 cursor-pointer opacity-50 hover:opacity-70 transition-all duration-300 transform scale-90"
-            onClick={showPrevRelease}
-          >
+          {/* Previous card (smaller) - only show if not on first track */}
+          {activeIndex !== 0 ? (
+            <div 
+              key={`prev-card-${getPrevIndex()}`}
+              className="hidden md:block w-1/3 cursor-pointer opacity-50 hover:opacity-70 transition-all duration-300 transform scale-90"
+              onClick={showPrevRelease}
+            >
             <div className="bg-card rounded-lg shadow-lg overflow-hidden border border-border">
               <div className="aspect-square relative">
                 {musicReleases[getPrevIndex()].isReleased && musicReleases[getPrevIndex()].spotifyEmbedId ? (
                   <iframe data-testid="embed-iframe"  
                   style={{borderRadius: "12px"}} 
                   src="https://open.spotify.com/embed/track/5Unfq5dxYK013BQzsCNoJQ?utm_source=generator&theme=0" 
-                  width="100%" height="152" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                  width="100%" height="152" frameBorder="0" allowFullScreen={true} 
+                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                 ) : (
                   <Image 
                     src={musicReleases[getPrevIndex()].cover || "/placeholder.svg"} 
@@ -164,7 +170,11 @@ export default function Music() {
                 </p>
               </div>
             </div>
-          </div>
+            </div>
+          ) : (
+            <div className="hidden md:block w-1/3"></div>
+          )}
+          
 
           {/* Active card (larger) */}
           <div 
@@ -267,12 +277,13 @@ export default function Music() {
             </div>
           </div>
 
-          {/* Next card (smaller) */}
-          <div 
-            key={`next-card-${getNextIndex()}`}
-            className="hidden md:block w-1/3 cursor-pointer opacity-50 hover:opacity-70 transition-all duration-300 transform scale-90"
-            onClick={showNextRelease}
-          >
+          {/* Next card (smaller) - only show if not on last track */}
+          {activeIndex !== musicReleases.length - 1 ? (
+            <div 
+              key={`next-card-${getNextIndex()}`}
+              className="hidden md:block w-1/3 cursor-pointer opacity-50 hover:opacity-70 transition-all duration-300 transform scale-90"
+              onClick={showNextRelease}
+            >
             <div className="bg-card rounded-lg shadow-lg overflow-hidden border border-border">
               <div className="aspect-square relative">
                 {musicReleases[getNextIndex()].isReleased && musicReleases[getNextIndex()].spotifyEmbedId ? (
@@ -302,7 +313,11 @@ export default function Music() {
                 </p>
               </div>
             </div>
-          </div>
+            </div>
+          ) : (
+            <div className="hidden md:block w-1/3"></div>
+          )}
+          
         </div>
       </div>
 
