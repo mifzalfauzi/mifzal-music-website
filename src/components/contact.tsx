@@ -24,7 +24,7 @@ export default function Contact() {
         />
         <textarea
           name="message"
-          placeholder="Message"
+          placeholder="Send a message"
           required
           className="border rounded px-3 py-2 w-full h-32"
         ></textarea>
