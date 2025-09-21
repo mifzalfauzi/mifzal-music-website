@@ -7,31 +7,73 @@ import { Button } from "@/components/ui/button"
 
 const musicReleases = [
   {
-    title: "",
+    title: "Intervallum",
     type: "Single",
     year: "2023",
-    cover: "/placeholder.svg?height=500&width=500",
+    cover: "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02a095dbc29c017745bcb14714  ",
+    spotifyUrl: "https://open.spotify.com/",
+    appleMusicUrl: "https://music.apple.com/",
+    bandcampUrl: "https://bandcamp.com/",
+    spotifyEmbedId: "4TbPxJ5jUspuAN8sUZQSCs", // Add your Spotify track/album ID here
+    isReleased: true,
+    tracks: [
+      { title: "Intervallum", duration: "4:05" },
+    ],
+  },
+  {
+    title: "Vita",
+    type: "Single",
+    year: "2023",
+    cover: "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02590377c4b00634518a7cc5ff",
+    spotifyUrl: "https://open.spotify.com/",
+    appleMusicUrl: "https://music.apple.com/",
+    bandcampUrl: "https://bandcamp.com/",
+    spotifyEmbedId: "1xo4cAMxixCp0ml4ZYeTEM", // Add your Spotify track/album ID here
+    isReleased: true,
+    tracks: [
+      { title: "Vita", duration: "4:05" },
+    ],
+  },
+  {
+    title: "Casia",
+    type: "Single",
+    year: "2023",
+    cover: "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0228f2b587dfb595dbb5830547",
     spotifyUrl: "https://open.spotify.com/",
     appleMusicUrl: "https://music.apple.com/",
     bandcampUrl: "https://bandcamp.com/",
     spotifyEmbedId: "5Unfq5dxYK013BQzsCNoJQ", // Add your Spotify track/album ID here
     isReleased: true,
     tracks: [
-      { title: "Leocasia", duration: "4:05" },
+      { title: "Casia", duration: "4:05" },
     ],
   },
   {
-    title: "TBC",
+    title: "August Op.6",
     type: "Single",
-    year: "Upcoming",
-    cover: "/placeholder.svg?height=500&width=500",
+    year: "2023",
+    cover: "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0228f2b587dfb595dbb5830547",
     spotifyUrl: "https://open.spotify.com/",
     appleMusicUrl: "https://music.apple.com/",
     bandcampUrl: "https://bandcamp.com/",
-    spotifyEmbedId: "", // Add your Spotify track/album ID here
-    isReleased: false,
+    spotifyEmbedId: "3z2eCytxrj6GuCeTau880O", // Add your Spotify track/album ID here
+    isReleased: true,
     tracks: [
-      { title: "TBC", duration: "4:15" }
+      { title: "August Op.6", duration: "4:15" }
+    ],
+  },
+  {
+    title: "Leo",
+    type: "Single",
+    year: "2023",
+    cover: "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0228f2b587dfb595dbb5830547",
+    spotifyUrl: "https://open.spotify.com/",
+    appleMusicUrl: "https://music.apple.com/",
+    bandcampUrl: "https://bandcamp.com/",
+    spotifyEmbedId: "22mxmfBYaBZz67Wp0TMhwv", // Add your Spotify track/album ID here
+    isReleased: true,
+    tracks: [
+      { title: "Leo", duration: "4:15" }
     ],
   },
   // Adding a third release helps test the consistency of transitions
@@ -149,11 +191,12 @@ export default function Music() {
             <div className="bg-card rounded-lg shadow-lg overflow-hidden border border-border">
               <div className="aspect-square relative">
                 {musicReleases[getPrevIndex()].isReleased && musicReleases[getPrevIndex()].spotifyEmbedId ? (
-                  <iframe data-testid="embed-iframe"  
-                  style={{borderRadius: "12px"}} 
-                  src="https://open.spotify.com/embed/track/5Unfq5dxYK013BQzsCNoJQ?utm_source=generator&theme=0" 
-                  width="100%" height="152" frameBorder="0" allowFullScreen={true} 
-                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                   <Image 
+                   src={musicReleases[getPrevIndex()].cover || "/placeholder.svg"} 
+                   alt={musicReleases[getPrevIndex()].title} 
+                   fill 
+                   className="object-cover" 
+                 />
                 ) : (
                   <Image 
                     src={musicReleases[getPrevIndex()].cover || "/placeholder.svg"} 
@@ -182,11 +225,11 @@ export default function Music() {
             className="w-full md:w-2/4 z-10 transition-all duration-300 transform"
           >
             <div className="bg-card rounded-xl shadow-lg overflow-hidden border border-border">
-              <div className="relative h-0 pb-[80%]">
+              <div className="relative h-0 pb-[70%]">
                 {musicReleases[activeIndex].isReleased && musicReleases[activeIndex].spotifyEmbedId ? (
                   <iframe
                     style={{borderRadius: "13px"}}
-                    src={`https://open.spotify.com/embed/track/${musicReleases[activeIndex].spotifyEmbedId}?utm_source=generator`}
+                    src={`https://open.spotify.com/embed/track/${musicReleases[activeIndex].spotifyEmbedId}?utm_source=generator&theme=0`}
                     width="100%"
                     height="352"
                     frameBorder="0"
@@ -219,7 +262,7 @@ export default function Music() {
               <div className="p-5">
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <h3 className="font-medium text-lg">{musicReleases[activeIndex].title}</h3>
+                    {/* <h3 className="font-medium text-lg">{musicReleases[activeIndex].title}</h3> */}
                     <p className="text-sm text-muted-foreground">
                       {musicReleases[activeIndex].type} • {musicReleases[activeIndex].year}
                     </p>
@@ -287,16 +330,12 @@ export default function Music() {
             <div className="bg-card rounded-lg shadow-lg overflow-hidden border border-border">
               <div className="aspect-square relative">
                 {musicReleases[getNextIndex()].isReleased && musicReleases[getNextIndex()].spotifyEmbedId ? (
-                  <iframe
-                    style={{borderRadius: "12px"}}
-                    src={`https://open.spotify.com/embed/track/${musicReleases[getNextIndex()].spotifyEmbedId}?utm_source=generator`}
-                    width="100%"
-                    height="152"
-                    frameBorder="0"
-                    allowFullScreen
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                    loading="lazy"
-                  />
+                   <Image 
+                   src={musicReleases[getNextIndex()].cover || "/placeholder.svg"} 
+                   alt={musicReleases[getNextIndex()].title} 
+                   fill 
+                   className="object-cover" 
+                 />
                 ) : (
                   <Image 
                     src={musicReleases[getNextIndex()].cover || "/placeholder.svg"} 
