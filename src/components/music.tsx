@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 
 const musicReleases = [
   {
-    title: "Serene",
+    title: "Leocasia",
     type: "Single",
     year: "Upcoming",
     cover: "/placeholder.svg?height=500&width=500",

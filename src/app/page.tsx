@@ -10,6 +10,9 @@ import Shows from "@/components/shows"
 import BandMembers from "@/components/band-members"
 import Newsletter from "@/components/newsletter"
 import Footer from "@/components/footer"
+import About from "@/components/about"
+import Contact from "@/components/contact"
+import UpcomingMusic from "@/components/upcoming-music"
 
 // Animation variants for sections
 const sectionVariants = {
@@ -41,7 +44,7 @@ export default function Home() {
         {/* <section id="merch" className="py-16">
           <Merch />
         </section> */}
-        <motion.section 
+        {/* <motion.section 
           id="band" 
           className="py-16"
           initial="hidden"
@@ -50,9 +53,9 @@ export default function Home() {
           variants={sectionVariants}
         >
           <BandMembers />
-        </motion.section>
+        </motion.section> */}
 
-        <motion.section 
+        {/* <motion.section 
           id="shows" 
           className="py-16"
           initial="hidden"
@@ -61,6 +64,17 @@ export default function Home() {
           variants={sectionVariants}
         >
           <Shows />
+        </motion.section> */}
+
+<motion.section 
+          id="about" 
+          className="py-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, margin: "-100px" }}
+          variants={sectionVariants}
+        >
+          <About />
         </motion.section>
 
         <motion.section 
@@ -75,6 +89,17 @@ export default function Home() {
         </motion.section>
 
         <motion.section 
+          id="upcoming-music" 
+          className="py-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, margin: "-100px" }}
+          variants={sectionVariants}
+        >
+          <UpcomingMusic />
+        </motion.section>
+
+        {/* <motion.section 
           id="newsletter" 
           className="py-16"
           initial="hidden"
@@ -83,6 +108,16 @@ export default function Home() {
           variants={sectionVariants}
         >
           <Newsletter />
+        </motion.section> */}
+        <motion.section 
+          id="contact" 
+          className="py-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, margin: "-100px" }}
+          variants={sectionVariants}
+        >
+          <Contact />
         </motion.section>
       </main>
 

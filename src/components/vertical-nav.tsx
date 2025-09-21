@@ -6,32 +6,48 @@ export default function VerticalNav() {
       <ul className="flex flex-col space-y-6 text-sm font-light">
         <li className="transform transition-all duration-300 hover:translate-x-4 hover:scale-110">
           <Link href="#home" className="text-white hover:text-white/80 transition-colors tracking-widest text-lg md:text-xl">
-            INA&apos;S LOUNGE
+            MIFZAL
           </Link>
         </li>
         {/* <li>
-          <Link href="#merch" className="text-white hover:text-white/80 transition-colors tracking-widest">
+          <Link href="#merch" className=a"text-white hover:text-white/80 transition-colors tracking-widest">
             MERCH
           </Link>
         </li> */}
-        <li className="transform transition-all duration-300 hover:translate-x-4 hover:scale-110">
+        <li>
+          <Link href="#about" className="text-white hover:text-white/80 transition-colors tracking-widest">
+            ABOUT
+          </Link>
+        </li>
+        {/* <li className="transform transition-all duration-300 hover:translate-x-4 hover:scale-110">
           <Link href="#shows" className="text-white hover:text-white/80 transition-colors tracking-widest">
             SHOWS
           </Link>
-        </li>
+        </li> */}
+        
         <li className="transform transition-all duration-300 hover:translate-x-4 hover:scale-110">
           <Link href="#music" className="text-white hover:text-white/80 transition-colors tracking-widest">
             MUSIC
           </Link>
         </li>
         <li className="transform transition-all duration-300 hover:translate-x-4 hover:scale-110">
+          <Link href="#upcoming-music" className="text-white hover:text-white/80 transition-colors tracking-widest">
+            UPCOMING 
+          </Link>
+        </li>
+        {/* <li className="transform transition-all duration-300 hover:translate-x-4 hover:scale-110">
           <Link href="#band" className="text-white hover:text-white/80 transition-colors tracking-widest">
             MEMBERS
           </Link>
-        </li>
-        <li className="transform transition-all duration-300 hover:translate-x-4 hover:scale-110">
+        </li> */}
+        {/* <li className="transform transition-all duration-300 hover:translate-x-4 hover:scale-110">
           <Link href="#newsletter" className="text-white hover:text-white/80 transition-colors tracking-widest">
             NEWSLETTER
+          </Link>
+        </li> */}
+        <li className="transform transition-all duration-300 hover:translate-x-4 hover:scale-110">
+          <Link href="#contact" className="text-white hover:text-white/80 transition-colors tracking-widest">
+            CONTACT
           </Link>
         </li>
       </ul>

@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ina's Lounge",
-  description: "Ina's Lounge",
+  title: "Mifzal",
+  description: "Mifzal",
 };
 
 export default function RootLayout({
