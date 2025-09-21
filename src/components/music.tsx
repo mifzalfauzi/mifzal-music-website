@@ -104,7 +104,7 @@ export default function Music() {
 
     setIsTransitioning(true)
     setActiveIndex((prevIndex) => (prevIndex + 1) % musicReleases.length)
-    setTimeout(() => setIsTransitioning(false), 300) // Match transition duration
+    setTimeout(() => setIsTransitioning(false), 800)
   }
 
   // Switch to previous release with transition state
@@ -115,7 +115,7 @@ export default function Music() {
     setActiveIndex((prevIndex) =>
       prevIndex === 0 ? musicReleases.length - 1 : prevIndex - 1
     )
-    setTimeout(() => setIsTransitioning(false), 300) // Match transition duration
+    setTimeout(() => setIsTransitioning(false), 800)
   }
 
   // Automatic cycling through releases every 1.5 seconds
@@ -190,7 +190,7 @@ export default function Music() {
           </button>
         )}
 
-        {/* Carousel with centered active card and smaller side cards */}
+        {/* Carousel with simple scale animations */}
         <div
           className="flex justify-center items-center gap-4 md:gap-8 h-full"
           onMouseEnter={handleMouseEnter}
@@ -203,26 +203,17 @@ export default function Music() {
           {activeIndex !== 0 ? (
             <div
               key={`prev-card-${getPrevIndex()}`}
-              className="hidden md:block w-1/3 cursor-pointer opacity-50 hover:opacity-70 transition-all duration-300 transform scale-90"
+              className="hidden md:block w-1/3 cursor-pointer opacity-50 hover:opacity-70 transition-all duration-800 ease-in-out transform scale-90 hover:scale-95"
               onClick={showPrevRelease}
             >
               <div className="bg-card rounded-lg shadow-lg overflow-hidden border border-border">
                 <div className="aspect-square relative">
-                  {musicReleases[getPrevIndex()].isReleased && musicReleases[getPrevIndex()].spotifyEmbedId ? (
-                    <Image
-                      src={musicReleases[getPrevIndex()].cover || "/placeholder.svg"}
-                      alt={musicReleases[getPrevIndex()].title}
-                      fill
-                      className="object-cover"
-                    />
-                  ) : (
-                    <Image
-                      src={musicReleases[getPrevIndex()].cover || "/placeholder.svg"}
-                      alt={musicReleases[getPrevIndex()].title}
-                      fill
-                      className="object-cover"
-                    />
-                  )}
+                  <Image
+                    src={musicReleases[getPrevIndex()].cover || "/placeholder.svg"}
+                    alt={musicReleases[getPrevIndex()].title}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
                 <div className="p-2">
                   <h3 className="font-medium text-sm truncate">{musicReleases[getPrevIndex()].title}</h3>
@@ -236,17 +227,17 @@ export default function Music() {
             <div className="hidden md:block w-1/3"></div>
           )}
 
-
           {/* Active card (larger) */}
           <div
             key={`main-card-${activeIndex}`}
-            className="w-full md:w-2/4 z-10 transition-all duration-300 transform"
+            className="w-full md:w-2/4 z-10 transition-all duration-800 ease-in-out transform scale-100"
           >
             <div className="bg-card rounded-xl shadow-lg overflow-hidden border border-border">
               <div className="relative h-0"
-  style={{
-    paddingBottom: musicReleases[activeIndex].type === "Single" ? "70%" : "75%",
-  }}>
+                style={{
+                  paddingBottom: musicReleases[activeIndex].type === "Single" ? "70%" : "75%",
+                }}
+              >
                 {musicReleases[activeIndex].isReleased && musicReleases[activeIndex].spotifyEmbedId ? (
                   <iframe
                     style={{ borderRadius: "13px" }}
@@ -261,39 +252,24 @@ export default function Music() {
                     loading="lazy"
                   />
                 ) : (
-                  <>
-                    <Image
-                      src={musicReleases[activeIndex].cover || "/placeholder.svg"}
-                      alt={musicReleases[activeIndex].title}
-                      fill
-                      className="object-cover transition-opacity duration-300"
-                    />
-
-                    {/* Play overlay */}
-                    {/* <div className="absolute inset-0 bg-black/0 hover:bg-black/20 transition-colors flex items-center justify-center opacity-0 hover:opacity-100">
-                      <Button
-                        size="icon"
-                        className="rounded-full w-14 h-14 bg-background/90 hover:bg-background text-foreground"
-                      >
-                        <Play size={24} />
-                      </Button>
-                    </div> */}
-                  </>
+                  <Image
+                    src={musicReleases[activeIndex].cover || "/placeholder.svg"}
+                    alt={musicReleases[activeIndex].title}
+                    fill
+                    className="object-cover transition-opacity duration-300"
+                  />
                 )}
               </div>
 
               <div className="p-5">
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    {/* <h3 className="font-medium text-lg">{musicReleases[activeIndex].title}</h3> */}
                     <p className="text-sm text-muted-foreground">
                       {musicReleases[activeIndex].type} • {musicReleases[activeIndex].year}
                     </p>
                   </div>
 
                   <div className="flex space-x-3">
-                    {/* <p> Listen on</p> */}
-                   
                     <a
                       href={musicReleases[activeIndex].youtubeUrl}
                       target="_blank"
@@ -302,8 +278,6 @@ export default function Music() {
                       aria-label="Listen on Youtube"
                     >
                       <Youtube className="w-4 h-4" />
-
-
                     </a>
                     <a
                       href={musicReleases[activeIndex].appleMusicUrl}
@@ -313,10 +287,7 @@ export default function Music() {
                       aria-label="Listen on Apple Music"
                     >
                       <MusicIcon className="w-4 h-4" />
-
-
                     </a>
-
                     <a
                       href={musicReleases[activeIndex].bandcampUrl}
                       target="_blank"
@@ -324,40 +295,12 @@ export default function Music() {
                       className="flex items-center gap-2 text-muted-foreground hover:text-blue-500 transition-colors"
                       aria-label="Listen on Bandcamp"
                     >
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M8.5 21l7.5-18h-7.5l-7.5 18z" fill="currentColor" />
                       </svg>
-
                     </a>
-
                   </div>
                 </div>
-
-                {/* <div className="space-y-2 max-h-[150px] overflow-y-auto">
-                  {musicReleases[activeIndex].tracks.map((track) => (
-                    <div
-                      key={track.title}
-                      className="flex items-center p-2 hover:bg-muted transition-colors rounded-md"
-                    >
-                      <Button size="sm" variant="ghost" className="rounded-full w-7 h-7 p-0 mr-2">
-                        <Play size={14} />
-                        <span className="sr-only">Play {track.title}</span>
-                      </Button>
-
-                      <div className="flex-1 truncate">
-                        <p className="text-sm font-medium truncate">{track.title}</p>
-                      </div>
-
-                      <div className="text-muted-foreground text-xs">{track.duration}</div>
-                    </div>
-                  ))}
-                </div> */}
               </div>
             </div>
           </div>
@@ -366,26 +309,17 @@ export default function Music() {
           {activeIndex !== musicReleases.length - 1 ? (
             <div
               key={`next-card-${getNextIndex()}`}
-              className="hidden md:block w-1/3 cursor-pointer opacity-50 hover:opacity-70 transition-all duration-300 transform scale-90"
+              className="hidden md:block w-1/3 cursor-pointer opacity-50 hover:opacity-70 transition-all duration-800 ease-in-out transform scale-90 hover:scale-95"
               onClick={showNextRelease}
             >
               <div className="bg-card rounded-lg shadow-lg overflow-hidden border border-border">
                 <div className="aspect-square relative">
-                  {musicReleases[getNextIndex()].isReleased && musicReleases[getNextIndex()].spotifyEmbedId ? (
-                    <Image
-                      src={musicReleases[getNextIndex()].cover || "/placeholder.svg"}
-                      alt={musicReleases[getNextIndex()].title}
-                      fill
-                      className="object-cover"
-                    />
-                  ) : (
-                    <Image
-                      src={musicReleases[getNextIndex()].cover || "/placeholder.svg"}
-                      alt={musicReleases[getNextIndex()].title}
-                      fill
-                      className="object-cover"
-                    />
-                  )}
+                  <Image
+                    src={musicReleases[getNextIndex()].cover || "/placeholder.svg"}
+                    alt={musicReleases[getNextIndex()].title}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
                 <div className="p-2">
                   <h3 className="font-medium text-sm truncate">{musicReleases[getNextIndex()].title}</h3>
@@ -408,11 +342,12 @@ export default function Music() {
           <button
             key={index}
             onClick={() => {
+              if (isTransitioning) return;
               setIsTransitioning(true);
               setActiveIndex(index);
-              setTimeout(() => setIsTransitioning(false), 300);
+              setTimeout(() => setIsTransitioning(false), 800);
             }}
-            className={`w-2 h-2 rounded-full cursor-pointer transition-colors duration-300 ${index === activeIndex ? "bg-foreground" : "bg-muted-foreground/30"
+            className={`w-2 h-2 rounded-full cursor-pointer transition-all duration-800 ease-in-out hover:scale-125 ${index === activeIndex ? "bg-foreground scale-110" : "bg-muted-foreground/30"
               }`}
             aria-label={`Go to release ${index + 1}`}
           />

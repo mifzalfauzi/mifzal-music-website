@@ -9,7 +9,7 @@ const upcomingReleases = [
     type: "Single",
     expectedDate: "TBC",
     status: "In Production",
-    description: "A cinematic, progressive guitar-driven track that blends atmospheric textures with melodic phrasing. Inspired by modern instrumentalists such as Plini and David Maxim Micic.",
+    description: "A cinematic, progressive guitar-driven track that blends atmospheric textures with melodic phrasing.",
     genre: "Ambient Rock",
     duration: "~4:10",
   },
@@ -18,7 +18,7 @@ const upcomingReleases = [
     type: "Multi-track Single",
     expectedDate: "TBC",
     status: "In Production",
-    description: "An instrumental progressive track blending cinematic textures, melodic guitar work, and neoclassical influences. Consists of three tracks, one main single (Sapphire : A-side) and two supporting B-sides (Pieces of A Vague Ceremony & Vita). In which exists together as a conceptual suite version that flows seamlessly from start to finish.",
+    description: "An instrumental progressive track blending cinematic textures, melodic guitar work, and neoclassical influences which exists together as a conceptual suite version that flows seamlessly from start to finish.",
     genre: "Progressive/Orchestral",
     duration: "~9:00",
     tracks: ["Sapphire", "Pieces of A Vague Ceremony", "Vita"]

@@ -11,20 +11,20 @@ export default function Contact() {
         <input
           type="text"
           name="name"
-          placeholder="Your Name"
+          placeholder="Name"
           required
           className="border rounded px-3 py-2 w-full"
         />
         <input
           type="email"
           name="email"
-          placeholder="Your Email"
+          placeholder="Email"
           required
           className="border rounded px-3 py-2 w-full"
         />
         <textarea
           name="message"
-          placeholder="Your Message"
+          placeholder="Message"
           required
           className="border rounded px-3 py-2 w-full h-32"
         ></textarea>
