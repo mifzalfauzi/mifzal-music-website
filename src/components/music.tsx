@@ -7,15 +7,17 @@ import { Button } from "@/components/ui/button"
 
 const musicReleases = [
   {
-    title: "Leocasia",
+    title: "",
     type: "Single",
-    year: "Upcoming",
+    year: "2023",
     cover: "/placeholder.svg?height=500&width=500",
     spotifyUrl: "https://open.spotify.com/",
     appleMusicUrl: "https://music.apple.com/",
     bandcampUrl: "https://bandcamp.com/",
+    spotifyEmbedId: "5Unfq5dxYK013BQzsCNoJQ", // Add your Spotify track/album ID here
+    isReleased: true,
     tracks: [
-      { title: "Serene", duration: "4:05" },
+      { title: "Leocasia", duration: "4:05" },
     ],
   },
   {
@@ -26,6 +28,8 @@ const musicReleases = [
     spotifyUrl: "https://open.spotify.com/",
     appleMusicUrl: "https://music.apple.com/",
     bandcampUrl: "https://bandcamp.com/",
+    spotifyEmbedId: "", // Add your Spotify track/album ID here
+    isReleased: false,
     tracks: [
       { title: "TBC", duration: "4:15" }
     ],
@@ -81,19 +85,19 @@ export default function Music() {
   }
 
   // Automatic cycling through releases every 1.5 seconds
-  useEffect(() => {
-    let intervalId: string | number | NodeJS.Timeout | undefined;
+  // useEffect(() => {
+  //   let intervalId: string | number | NodeJS.Timeout | undefined;
     
-    if (!isPaused && !isTransitioning) {
-      intervalId = setInterval(() => {
-        showNextRelease();
-      }, 3000);
-    }
+  //   if (!isPaused && !isTransitioning) {
+  //     intervalId = setInterval(() => {
+  //       showNextRelease();
+  //     }, 3000);
+  //   }
 
-    return () => {
-      if (intervalId) clearInterval(intervalId);
-    };
-  }, [isPaused, isTransitioning, activeIndex]);
+  //   return () => {
+  //     if (intervalId) clearInterval(intervalId);
+  //   };
+  // }, [isPaused, isTransitioning, activeIndex]);
 
   // Pause automatic cycling on hover or touch
   const handleMouseEnter = () => setIsPaused(true)
@@ -105,11 +109,11 @@ export default function Music() {
     <div className="container mx-auto px-4">
       <h2 className="text-3xl font-light mb-12 text-center tracking-wider">MUSIC</h2>
 
-      <div className="relative max-w-5xl mx-auto">
+      <div className="relative max-w-7xl mx-auto">
         {/* Navigation arrows */}
         <button
           onClick={showPrevRelease}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-background/80 dark:bg-background/60 rounded-full p-2 shadow-md"
+          className="absolute top-1/2 -translate-y-1/2 z-10 bg-background/80 dark:bg-background/60 rounded-full p-2 shadow-md"
           aria-label="Previous release"
         >
           <ChevronLeft size={24} />
@@ -134,17 +138,24 @@ export default function Music() {
           {/* Previous card (smaller) */}
           <div 
             key={`prev-card-${getPrevIndex()}`}
-            className="hidden md:block w-1/4 cursor-pointer opacity-50 hover:opacity-70 transition-all duration-300 transform scale-90"
+            className="hidden md:block w-1/3 cursor-pointer opacity-50 hover:opacity-70 transition-all duration-300 transform scale-90"
             onClick={showPrevRelease}
           >
             <div className="bg-card rounded-lg shadow-lg overflow-hidden border border-border">
               <div className="aspect-square relative">
-                <Image 
-                  src={musicReleases[getPrevIndex()].cover || "/placeholder.svg"} 
-                  alt={musicReleases[getPrevIndex()].title} 
-                  fill 
-                  className="object-cover" 
-                />
+                {musicReleases[getPrevIndex()].isReleased && musicReleases[getPrevIndex()].spotifyEmbedId ? (
+                  <iframe data-testid="embed-iframe"  
+                  style={{borderRadius: "12px"}} 
+                  src="https://open.spotify.com/embed/track/5Unfq5dxYK013BQzsCNoJQ?utm_source=generator&theme=0" 
+                  width="100%" height="152" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                ) : (
+                  <Image 
+                    src={musicReleases[getPrevIndex()].cover || "/placeholder.svg"} 
+                    alt={musicReleases[getPrevIndex()].title} 
+                    fill 
+                    className="object-cover" 
+                  />
+                )}
               </div>
               <div className="p-2">
                 <h3 className="font-medium text-sm truncate">{musicReleases[getPrevIndex()].title}</h3>
@@ -160,24 +171,39 @@ export default function Music() {
             key={`main-card-${activeIndex}`}
             className="w-full md:w-2/4 z-10 transition-all duration-300 transform"
           >
-            <div className="bg-card rounded-lg shadow-lg overflow-hidden border border-border">
-              <div className="aspect-square relative">
-                <Image 
-                  src={musicReleases[activeIndex].cover || "/placeholder.svg"} 
-                  alt={musicReleases[activeIndex].title} 
-                  fill 
-                  className="object-cover transition-opacity duration-300" 
-                />
-                
-                {/* Play overlay */}
-                <div className="absolute inset-0 bg-black/0 hover:bg-black/20 transition-colors flex items-center justify-center opacity-0 hover:opacity-100">
-                  <Button
-                    size="icon"
-                    className="rounded-full w-14 h-14 bg-background/90 hover:bg-background text-foreground"
-                  >
-                    <Play size={24} />
-                  </Button>
-                </div>
+            <div className="bg-card rounded-xl shadow-lg overflow-hidden border border-border">
+              <div className="relative h-0 pb-[80%]">
+                {musicReleases[activeIndex].isReleased && musicReleases[activeIndex].spotifyEmbedId ? (
+                  <iframe
+                    style={{borderRadius: "13px"}}
+                    src={`https://open.spotify.com/embed/track/${musicReleases[activeIndex].spotifyEmbedId}?utm_source=generator`}
+                    width="100%"
+                    height="352"
+                    frameBorder="0"
+                    allowFullScreen
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"
+                  />
+                ) : (
+                  <>
+                    <Image 
+                      src={musicReleases[activeIndex].cover || "/placeholder.svg"} 
+                      alt={musicReleases[activeIndex].title} 
+                      fill 
+                      className="object-cover transition-opacity duration-300" 
+                    />
+                    
+                    {/* Play overlay */}
+                    {/* <div className="absolute inset-0 bg-black/0 hover:bg-black/20 transition-colors flex items-center justify-center opacity-0 hover:opacity-100">
+                      <Button
+                        size="icon"
+                        className="rounded-full w-14 h-14 bg-background/90 hover:bg-background text-foreground"
+                      >
+                        <Play size={24} />
+                      </Button>
+                    </div> */}
+                  </>
+                )}
               </div>
 
               <div className="p-5">
@@ -218,7 +244,7 @@ export default function Music() {
                   </div>
                 </div>
 
-                <div className="space-y-2 max-h-[150px] overflow-y-auto">
+                {/* <div className="space-y-2 max-h-[150px] overflow-y-auto">
                   {musicReleases[activeIndex].tracks.map((track) => (
                     <div
                       key={track.title}
@@ -236,7 +262,7 @@ export default function Music() {
                       <div className="text-muted-foreground text-xs">{track.duration}</div>
                     </div>
                   ))}
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -244,17 +270,30 @@ export default function Music() {
           {/* Next card (smaller) */}
           <div 
             key={`next-card-${getNextIndex()}`}
-            className="hidden md:block w-1/4 cursor-pointer opacity-50 hover:opacity-70 transition-all duration-300 transform scale-90"
+            className="hidden md:block w-1/3 cursor-pointer opacity-50 hover:opacity-70 transition-all duration-300 transform scale-90"
             onClick={showNextRelease}
           >
             <div className="bg-card rounded-lg shadow-lg overflow-hidden border border-border">
               <div className="aspect-square relative">
-                <Image 
-                  src={musicReleases[getNextIndex()].cover || "/placeholder.svg"} 
-                  alt={musicReleases[getNextIndex()].title} 
-                  fill 
-                  className="object-cover" 
-                />
+                {musicReleases[getNextIndex()].isReleased && musicReleases[getNextIndex()].spotifyEmbedId ? (
+                  <iframe
+                    style={{borderRadius: "12px"}}
+                    src={`https://open.spotify.com/embed/track/${musicReleases[getNextIndex()].spotifyEmbedId}?utm_source=generator`}
+                    width="100%"
+                    height="152"
+                    frameBorder="0"
+                    allowFullScreen
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"
+                  />
+                ) : (
+                  <Image 
+                    src={musicReleases[getNextIndex()].cover || "/placeholder.svg"} 
+                    alt={musicReleases[getNextIndex()].title} 
+                    fill 
+                    className="object-cover" 
+                  />
+                )}
               </div>
               <div className="p-2">
                 <h3 className="font-medium text-sm truncate">{musicReleases[getNextIndex()].title}</h3>
