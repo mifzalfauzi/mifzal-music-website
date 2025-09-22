@@ -7,21 +7,21 @@ export default function Contact() {
 
   return (
     <div className="container mx-auto px-4 text-center">
-      <h2 className="text-3xl font-light mb-12 tracking-wider">CONTACT</h2>
+      <h2 className="text-lg md:text-3xl font-light mb-12 tracking-wider">CONTACT</h2>
       
       <div className="mb-8">
         {/* <p className="text-lg mb-4">Get in touch directly:</p> */}
         <div className="flex justify-center items-center gap-3">
-          <Mail className="w-5 h-5 text-muted-foreground" />
+          <Mail className="w-4 h-4 md:w-5 md:h-5 text-muted-foreground" />
           <a
             href="mailto:mifzalmusic@gmail.com"
-            className="text-foreground hover:text-primary transition-colors"
+            className="text-sm md:text-base text-foreground hover:text-primary transition-colors"
           >
             mifzalmusic@gmail.com
           </a>
           <button
             onClick={() => copyToClipboard('mifzalmusic@gmail.com')}
-            className="text-muted-foreground hover:text-foreground transition-colors"
+            className="text-muted-foreground hover:text-foreground transition-colors text-sm md:text-base"
           >
             <Copy className="w-4 h-4" />
           </button>

@@ -8,7 +8,7 @@ export default function Footer() {
     <footer className="py-12 border-t border-border">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
-          <p className="text-muted-foreground mb-4 md:mb-0">
+          <p className="text-muted-foreground text-sm md:text-base mb-4 md:mb-0">
             &copy; {currentYear} Mifzal. All rights reserved.
           </p>
 
@@ -64,10 +64,10 @@ export default function Footer() {
           </div> */}
 
           <div className="flex space-x-4">
-            <Link href="/privacy" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
+            <Link href="/privacy" className="text-muted-foreground hover:text-foreground transition-colors text-sm md:text-base">
               Privacy Policy
             </Link>
-            <Link href="/terms" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
+            <Link href="/terms" className="text-muted-foreground hover:text-foreground transition-colors text-sm md:text-base">
               Terms of Service
             </Link>
           </div>

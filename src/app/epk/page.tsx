@@ -49,9 +49,9 @@ export default function EPK() {
 
             {/* Text Content */}
             <div className="text-center md:text-left">
-              <p className="text-xl md:text-md text-muted-foreground font-light mb-4">Electronic Press Kit</p>
-              <h1 className="text-5xl md:text-7xl font-light mb-6 tracking-wider">MIFZAL</h1>
-              <p className="text-xl md:text-2xl text-muted-foreground font-light mb-4">
+              <p className="text-lg md:text-md text-muted-foreground font-light mb-4">Electronic Press Kit</p>
+              <h1 className="text-3xl md:text-7xl font-light mb-6 tracking-wider">MIFZAL</h1>
+              <p className="text-lg md:text-2xl text-muted-foreground font-light mb-4">
                 Cinematic Progressive Composer
               </p>
               <div className="flex justify-center md:justify-start">
@@ -65,7 +65,7 @@ export default function EPK() {
                   <ExternalLink className="w-4 h-4" />
                 </a>
               </div>
-              <div className="flex gap-6 pt-6">
+              <div className="flex justify-center md:justify-start gap-6 pt-6">
 
                 <a
                   href="https://instagram.com/mifzalv"
@@ -131,20 +131,20 @@ export default function EPK() {
 
 
       {/* Short Bio */}
-      <section className="py-16 px-4">
+      <section className="py-16 px-4 ml-2 mr-2 md:ml-0 md:mr-0">
         <div className="container mx-auto max-w-3xl">
-          <h2 className="text-2xl font-light mb-8 tracking-wider">ARTIST OVERVIEW</h2>
-          <p className="space-y-6 leading-relaxed text-muted-foreground">
+          <h2 className="text-lg md:text-2xl font-light mb-8 tracking-wider">ARTIST OVERVIEW</h2>
+          <p className="space-y-6 leading-relaxed text-muted-foreground text-sm md:text-base">
             Mifzal, 23, is an emerging composer from Malaysia, crafting cinematic progressive music that blends atmospheric textures with melodic guitar-driven and orchestral compositions. His work explores the intersection of ambient soundscapes and intricate progressive arrangements, creating immersive musical narratives.
           </p>
         </div>
       </section>
 
       {/* Longer Bio */}
-      <section className="py-16 px-4  ">
+      <section className="py-16 px-4 ml-2 mr-2 md:ml-0 md:mr-0">
         <div className="container mx-auto max-w-3xl">
-          <h2 className="text-2xl font-light mb-8 tracking-wider">MUSICAL VISION</h2>
-          <div className="space-y-6 text-muted-foreground leading-relaxed">
+          <h2 className="text-lg md:text-2xl font-light mb-8 tracking-wider">MUSICAL VISION</h2>
+          <div className="space-y-6 text-muted-foreground leading-relaxed text-sm md:text-base">
             <p>
               Mifzal creates music that transcends traditional genre boundaries, by weaving melodic guitar techniques with cinematic orchestrations to craft atmospheric and emotionally resonant pieces.
 
@@ -159,10 +159,10 @@ export default function EPK() {
         </div>
       </section>
 
-      <section className="py-16 px-4">
+      <section className="py-16 px-4 ml-2 mr-2 md:ml-0 md:mr-0">
         <div className="container mx-auto max-w-3xl">
-          <h2 className="text-2xl font-light mb-8 tracking-wider">FOR FANS OF</h2>
-          <p className="space-y-6 leading-relaxed text-muted-foreground">
+          <h2 className="text-lg md:text-2xl font-light mb-8 tracking-wider">FOR FANS OF</h2>
+          <p className="space-y-6 leading-relaxed text-muted-foreground text-sm md:text-base">
             David Maxim Micic, Plini, Ludovico Einaudi, Ludwig Göransson, and Aaron Hibell.
           </p>
         </div>
@@ -171,12 +171,12 @@ export default function EPK() {
 
 
       {/* Music Embed */}
-      <section className="py-16 px-4">
+      <section className="py-16 px-4 ml-2 mr-2 md:ml-0 md:mr-0">
         <div className="container mx-auto max-w-3xl">
-          <h2 className="text-2xl font-light mb-4 tracking-wider">FEATURED TRACK</h2>
+          <h2 className="text-lg md:text-2xl font-light mb-4 tracking-wider">FEATURED TRACK</h2>
           <div className="space-y-6">
             <div className="bg-background p-6 ">
-              <h3 className="text-xl font-light mb-4">Sapphire (Demo)</h3>
+              <h3 className="text-base md:text-xl font-light mb-4">Sapphire (Demo)</h3>
 
               {/* SoundCloud Compact Embed */}
               <div className="w-full overflow-hidden">
@@ -191,16 +191,16 @@ export default function EPK() {
                 ></iframe>
               </div>
 
-              <p className="text-sm text-muted-foreground mt-6">
+              <p className="text-sm md:text-base text-muted-foreground mt-6">
                 <strong>"Sapphire"</strong> is a cinematic, progressive guitar-driven track that blends atmospheric textures with melodic phrasing. The piece explores the emotional depth of natural imagery through intricate guitar layers, subtle percussion, and evolving harmonies.
 
               </p>
 
-              <p className="text-sm text-muted-foreground mt-4">
+              <p className="text-sm md:text-base text-muted-foreground mt-4">
                 This track is the centerpiece of a larger conceptual suite, <strong>"Tales of Sapphire"</strong>, with supporting movements that extend the narrative into a full journey.
               </p>
 
-              <p className="text-sm text-muted-foreground mt-4 italic">
+              <p className="text-sm md:text-base text-muted-foreground mt-4 italic">
                 <span className="text-red-500 font-bold">* </span>
                 This track is in demo form and has not yet been professionally mixed or mastered.
               </p>
@@ -214,11 +214,11 @@ export default function EPK() {
 
       {/* Optional Playlist */}
       {/* Optional Playlist */}
-      <section className="py-16 px-4">
+      <section className="py-16 px-4 ml-2 mr-2 md:ml-0 md:mr-0">
         <div className="container mx-auto max-w-3xl">
-          <h2 className="text-2xl font-light mb-4 tracking-wider">EXTENDED CONCEPT</h2>
+          <h2 className="text-lg md:text-2xl font-light mb-4 tracking-wider">EXTENDED CONCEPT</h2>
           <div className="bg-background p-6">
-            <h3 className="text-lg font-light mb-4">Tales of Sapphire - Complete Suite (Demo)</h3>
+            <h3 className="text-base md:text-lg font-light mb-4">Tales of Sapphire - Complete Suite (Demo)</h3>
             <div className="w-full h-48 flex items-center justify-center text-muted-foreground">
               <iframe
                 width="100%"
@@ -230,7 +230,7 @@ export default function EPK() {
                 className=""
               />
             </div>
-            <p className="text-sm text-muted-foreground mt-4">
+            <p className="text-sm md:text-base text-muted-foreground mt-4">
               This conceptual suite includes the main single <strong>"Sapphire"</strong> and supporting movements
               <strong> "Pieces of The Vague Ceremony"</strong> and <strong>"Vita"</strong>, which extend the narrative
               into a full immersive journey.
@@ -284,14 +284,14 @@ export default function EPK() {
         </div>
       </section>
 
-      <section className="py-16 px-4">
+      <section className="py-16 px-4 ml-2 mr-2 md:ml-0 md:mr-0">
         <div className="container mx-auto max-w-3xl">
-          <h2 className="text-2xl font-light mb-8 tracking-wider">RELEASED TRACKS</h2>
-          <p className="leading-relaxed text-muted-foreground">
-  For previously released tracks and full discography, visit the Music section at{' '}<br/>
+          <h2 className="text-lg md:text-2xl font-light mb-8 tracking-wider">RELEASED TRACKS</h2>
+          <p className="leading-relaxed text-muted-foreground text-sm md:text-base">
+  For previously released tracks and full discography, visit the Music section at{' '}
   <a
     href="https://mifzal.co"
-    className="text-foreground hover:text-primary transition-colors inline-flex items-center gap-1"
+    className="text-sm md:text-base text-foreground hover:text-primary transition-colors inline-flex items-center gap-1"
   >
     mifzal.co
     <ExternalLink className="w-4 h-4 inline-block" />
@@ -303,10 +303,10 @@ export default function EPK() {
         </div>
       </section>
 
-      <section className="py-16 px-4">
+      <section className="py-16 px-4 ml-2 mr-2 md:ml-0 md:mr-0">
         <div className="container mx-auto max-w-3xl">
-          <h2 className="text-2xl font-light mb-8 tracking-wider">PRESS PHOTOS</h2>
-          <p className="space-y-6 leading-relaxed text-muted-foreground">
+          <h2 className="text-lg md:text-2xl font-light mb-8 tracking-wider">PRESS PHOTOS</h2>
+          <p className="space-y-6 leading-relaxed text-muted-foreground text-sm md:text-base">
             Coming soon.
           </p>
         </div>
@@ -314,21 +314,21 @@ export default function EPK() {
 
 
       {/* Contact Section */}
-      <section className="py-16 px-4">
+      <section className="py-16 px-4 ml-2 mr-2 md:ml-0 md:mr-0">
         <div className="container mx-auto max-w-3xl">
-          <h2 className="text-2xl font-light mb-8 tracking-wider">CONTACT</h2>
+          <h2 className="text-lg md:text-2xl font-light mb-8 tracking-wider">CONTACT</h2>
           <div className="space-y-6">
             <div className="flex items-center gap-3 text-md">
-              <Mail className="w-5 h-5 text-muted-foreground" />
+              <Mail className="w-4 h-4 md:w-5 md:h-5 text-muted-foreground" />
               <a
                 href="mailto:mifzalmusic@gmail.com"
-                className="text-muted-foreground hover:text-primary transition-colors"
+                className="text-muted-foreground hover:text-primary transition-colors text-sm md:text-base"
               >
                 mifzalmusic@gmail.com
               </a>
               <button
                 onClick={() => copyToClipboard('mifzalmusic@gmail.com')}
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="text-muted-foreground hover:text-foreground transition-colors text-sm md:text-base "
               >
                 <Copy className="w-4 h-4" />
               </button>
@@ -374,7 +374,7 @@ export default function EPK() {
               >
                 Send
               </button>
-              <p className="text-muted-foreground text-sm mx-auto">Powered by Formspree.</p>
+              <p className="text-muted-foreground text-sm mx-auto">Powered by Formspree</p>
             </form>
 
           </div>
@@ -382,7 +382,7 @@ export default function EPK() {
       </section>
 
       {/* Footer Disclaimer */}
-      <footer className="py-8 px-4 border-t border-border">
+      <footer className="py-8 px-4 border-t border-border ml-2 mr-2 md:ml-0 md:mr-0">
         <div className="container mx-auto max-w-3xl text-center">
           <p className="text-sm text-muted-foreground">
             For label consideration only. Please do not share this link.

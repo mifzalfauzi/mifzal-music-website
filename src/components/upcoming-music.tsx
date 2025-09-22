@@ -10,7 +10,7 @@ const upcomingReleases = [
     expectedDate: "TBC",
     status: "In Production",
     description: "A cinematic, progressive guitar-driven track that blends atmospheric textures with melodic phrasing.",
-    genre: "Ambient Rock",
+    genre: "Cinematic/Progressive Rock",
     duration: "~4:10",
   },
   {
@@ -35,15 +35,15 @@ const statusColors = {
 export default function UpcomingMusic() {
   return (
     <div className="container mx-auto px-4">
-      <h2 className="text-3xl font-light mb-12 text-center tracking-wider">UPCOMING RELEASES</h2>
+      <h2 className="text-lg md:text-3xl font-light mb-12 text-center tracking-wider">UPCOMING RELEASES</h2>
       
       <div className="max-w-3xl mx-auto space-y-8">
         {upcomingReleases.map((release, index) => (
           <div key={index} className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-xl font-light tracking-wide">{release.title}</h3>
-                <div className="flex items-center gap-3 text-sm text-muted-foreground mt-1">
+                <h3 className="text-lg md:text-xl font-light tracking-wide">{release.title}</h3>
+                <div className="flex items-center gap-3 text-sm md:text-base text-muted-foreground mt-1">
                   <span>{release.type}</span>
                   <span>•</span>
                   <span>{release.genre}</span>
@@ -58,7 +58,7 @@ export default function UpcomingMusic() {
               </span>
             </div>
             
-            <p className="text-muted-foreground text-sm leading-relaxed">
+            <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
               {release.description}
             </p>
             
@@ -66,7 +66,7 @@ export default function UpcomingMusic() {
               <div className="space-y-2">
                 {release.tracks.map((track, trackIndex) => (
                   <div key={trackIndex} className="flex items-center justify-between py-2 border-b border-border/50 last:border-0">
-                    <span className="text-sm text-muted-foreground">
+                    <span className="text-sm md:text-base text-muted-foreground">
                       {String(trackIndex + 1).padStart(2, '0')}. {track}
                     </span>
                   </div>
@@ -82,7 +82,7 @@ export default function UpcomingMusic() {
       </div>
       
       <div className="text-center mt-12">
-        <p className="text-muted-foreground text-sm">
+        <p className="text-muted-foreground text-sm md:text-base">
           Release dates are subject to change.
         </p>
       </div>

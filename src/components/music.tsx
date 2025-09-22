@@ -30,8 +30,8 @@ const musicReleases = [
     cover: "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02590377c4b00634518a7cc5ff",
     spotifyUrl: "https://open.spotify.com/",
     appleMusicUrl: "https://music.apple.com/",
-    bandcampUrl: "https://bandcamp.com/",
-    youtubeUrl: "https://www.youtube.com/watch?v=1xo4cAMxixCp0ml4ZYeTEM",
+    bandcampUrl: "https://mifzal.bandcamp.com/track/vita",
+    youtubeUrl: "https://www.youtube.com/watch?v=1SUi9FLGxQM",
     spotifyEmbedId: "1xo4cAMxixCp0ml4ZYeTEM", // Add your Spotify track/album ID here
     isReleased: true,
     tracks: [
@@ -166,7 +166,7 @@ export default function Music() {
 
   return (
     <div className="container mx-auto px-4">
-      <h2 className="text-3xl font-light mb-12 text-center tracking-wider">MUSIC</h2>
+      <h2 className="text-lg md:text-3xl font-light mb-12 text-center tracking-wider">MUSIC</h2>
 
       <div className="relative max-w-7xl mx-auto">
         {/* Navigation arrows for mobile/tablet */}
@@ -279,7 +279,7 @@ export default function Music() {
                     >
                       <Youtube className="w-4 h-4" />
                     </a>
-                    <a
+                    {/* <a
                       href={musicReleases[activeIndex].appleMusicUrl}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -287,7 +287,7 @@ export default function Music() {
                       aria-label="Listen on Apple Music"
                     >
                       <MusicIcon className="w-4 h-4" />
-                    </a>
+                    </a> */}
                     <a
                       href={musicReleases[activeIndex].bandcampUrl}
                       target="_blank"
