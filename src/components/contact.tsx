@@ -1,4 +1,4 @@
-import { Mail, Copy, Check } from "lucide-react"
+import { Mail, Copy, Check, Instagram } from "lucide-react"
 import { useState } from "react"
 
 export default function Contact() {
@@ -81,6 +81,14 @@ export default function Contact() {
         </button>
         <p className="text-muted-foreground text-sm mx-auto">Powered by Formspree</p>
       </form>
+
+      <div className="mt-8 flex items-center justify-center gap-2">
+      <Instagram className="w-4 h-4" />
+        <p className="text-muted-foreground text-sm"><a href="https://instagram.com/mifzalv" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors text-sm md:text-sm">
+        say hello on Instagram
+        </a></p>
+        
+      </div>
       
     </div>
   )
