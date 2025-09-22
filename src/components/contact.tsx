@@ -1,8 +1,41 @@
+import { Mail, Copy } from "lucide-react"
+
 export default function Contact() {
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+  };
+
   return (
     <div className="container mx-auto px-4 text-center">
       <h2 className="text-3xl font-light mb-12 tracking-wider">CONTACT</h2>
       
+      <div className="mb-8">
+        {/* <p className="text-lg mb-4">Get in touch directly:</p> */}
+        <div className="flex justify-center items-center gap-3">
+          <Mail className="w-5 h-5 text-muted-foreground" />
+          <a
+            href="mailto:mifzalmusic@gmail.com"
+            className="text-foreground hover:text-primary transition-colors"
+          >
+            mifzalmusic@gmail.com
+          </a>
+          <button
+            onClick={() => copyToClipboard('mifzalmusic@gmail.com')}
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <Copy className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+
+      <div className="mb-8">
+        <div className="flex items-center justify-center gap-4">
+          <div className="h-px bg-border flex-1"></div>
+          <span className="text-muted-foreground text-sm">OR</span>
+          <div className="h-px bg-border flex-1"></div>
+        </div>
+      </div>
+
       <form
         action="https://formspree.io/f/mnngaqyb"// replace with your Formspree form ID
         method="POST"

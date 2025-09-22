@@ -1,9 +1,35 @@
 "use client"
 
-import { Mail, Music, Instagram, ExternalLink, Youtube } from "lucide-react"
+import { Mail, Music, Instagram, ExternalLink, Youtube, Copy } from "lucide-react"
 import Image from "next/image"
 
+const upcomingReleases = [
+  
+  {
+    title: "Tales of Sapphire",
+    type: "Multi-track Single",
+    expectedDate: "TBC",
+    status: "In Production",
+    description: "An instrumental progressive track blending cinematic textures, melodic guitar work, and neoclassical influences which exists together as a conceptual suite version that flows seamlessly from start to finish.",
+    genre: "Progressive/Orchestral",
+    duration: "~9:00",
+    tracks: ["Pieces of The Vague Ceremony", "Sapphire", "Vita (Reimagined)"],
+    individualDuration: ["0:00 - 1:47", "1:48 - 5:47", "5:48 - 8:32"]
+  },
+ 
+]
+
+const statusColors = {
+  "In Production": "text-yellow-600 dark:text-yellow-400 bg-yellow-50 dark:bg-yellow-900/20",
+  "Writing": "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20",
+  "Conceptual": "text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-900/20",
+}
+
 export default function EPK() {
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Hero/Header */}
@@ -112,14 +138,14 @@ export default function EPK() {
           <h2 className="text-2xl font-light mb-8 tracking-wider">MUSICAL VISION</h2>
           <div className="space-y-6 text-muted-foreground leading-relaxed">
             <p>
-            Mifzal creates music that transcends traditional genre boundaries, seamlessly weaving progressive guitar techniques with cinematic orchestration to craft deeply atmospheric and emotionally resonant pieces.
+              Mifzal creates music that transcends traditional genre boundaries, by weaving melodic guitar techniques with cinematic orchestrations to craft deeply atmospheric and emotionally resonant pieces.
 
             </p>
             <p>
-              The cornerstone of his artistic vision is the "Sapphire" concept - a musical exploration of cinematic melodies and atmospherical textures. "Tales of Sapphire" represents this vision in its fullest form: a multi-movement suite that flows seamlessly from intimate guitar passages to sweeping orchestral arrangements, telling a complete narrative through instrumental composition alone.
+              The cornerstone of his artistic vision is "Sapphire", a musical exploration of cinematic melodies, orchestral arrangements and atmospherical textures. "Tales of Sapphire" represents this vision in its fullest form: a multi-movement suite that flows seamlessly from intimate guitar passages to sweeping orchestral arrangements, telling a complete narrative through instrumental composition alone.
             </p>
             <p>
-              Through this conceptual framework, Mifzal aims to create music that serves as both technical showcase and emotional journey, inviting listeners into carefully crafted sonic worlds that reveal new details with each listen.
+              Through this conceptual framework, Mifzal aims to create music that serves as both technical showcase and emotional journey, inviting listeners into carefully crafted sounds with each listen.
             </p>
           </div>
         </div>
@@ -146,10 +172,20 @@ export default function EPK() {
                 ></iframe>
               </div>
 
+              <p className="text-sm text-muted-foreground mt-6">
+                <strong>"Sapphire"</strong> is a cinematic, progressive guitar-driven track that blends atmospheric textures with melodic phrasing. The piece explores the emotional depth of natural imagery through intricate guitar layers, subtle percussion, and evolving harmonies.
+
+              </p>
+
+              <p className="text-sm text-muted-foreground mt-4">
+                This track is the centerpiece of a larger conceptual suite, <strong>"Tales of Sapphire"</strong>, with supporting movements that extend the narrative into a full journey.
+              </p>
+
               <p className="text-sm text-muted-foreground mt-4 italic">
-               <span className="text-red bg-red">*</span>
+                <span className="text-red-500 font-bold">* </span>
                 This track is in demo form and has not yet been professionally mixed or mastered.
               </p>
+
             </div>
           </div>
         </div>
@@ -158,10 +194,11 @@ export default function EPK() {
 
 
       {/* Optional Playlist */}
-      <section className="py-16 px-4 ">
+      {/* Optional Playlist */}
+      <section className="py-16 px-4">
         <div className="container mx-auto max-w-3xl">
-          <h2 className="text-2xl font-light mb-4 tracking-wider">EXTENDED CONCEPT </h2>
-          <div className="bg-background p-6 ">
+          <h2 className="text-2xl font-light mb-4 tracking-wider">EXTENDED CONCEPT</h2>
+          <div className="bg-background p-6">
             <h3 className="text-lg font-light mb-4">Tales of Sapphire - Complete Suite (Demo)</h3>
             <div className="w-full h-48 flex items-center justify-center text-muted-foreground">
               <iframe
@@ -173,17 +210,61 @@ export default function EPK() {
                 src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2173802295%3Fsecret_token%3Ds-dfFZMgZHmlB&color=%230a0a0a&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"
                 className=""
               />
-
             </div>
             <p className="text-sm text-muted-foreground mt-4">
-              A conceptual suite featuring extended compositions that showcase the full scope of the Sapphire narrative.
+              This conceptual suite includes the main single <strong>"Sapphire"</strong> and supporting movements
+              <strong> "Pieces of The Vague Ceremony"</strong> and <strong>"Vita"</strong>, which extend the narrative
+              into a full immersive journey.
             </p>
-            <p className="text-sm text-muted-foreground mt-4 italic">
-              <span className="text-muted-foreground">*</span> This track is in demo form and has not yet been professionally mixed or mastered.
-            </p>
+
+            {upcomingReleases.map((release, index) => (
+              <div key={index} className="space-y-4">
+                {/* <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-xl font-light tracking-wide">{release.title}</h3>
+                    <div className="flex items-center gap-3 text-sm text-muted-foreground mt-1">
+                      <span>{release.type}</span>
+                      <span>•</span>
+                      <span>{release.genre}</span>
+                      <span>•</span>
+                      <span>{release.expectedDate}</span>
+                    </div>
+                  </div>
+                  <span
+                    className={`px-3 py-1 rounded-full text-xs font-medium ${statusColors[release.status as keyof typeof statusColors] || ""}`}
+                  >
+                    {release.status}
+                  </span>
+                </div> */}
+
+                {/* <p className="text-muted-foreground text-sm leading-relaxed">
+                  {release.description}
+                </p> */}
+
+                {release.tracks && (
+                  <div className="space-y-2 mt-4">
+                    {release.tracks.map((track, trackIndex) => (
+                      <div key={trackIndex} className="flex items-center justify-between py-2 border-b border-border/50 last:border-0">
+                        <span className="text-sm text-muted-foreground">
+                          {String(trackIndex + 1).padStart(2, '0')}. {track}
+                        </span>
+                        <span className="text-xs text-muted-foreground">
+                          {release.individualDuration[trackIndex]}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                <p className="text-sm text-muted-foreground mt-4 italic">
+                  <span className="text-red-500 font-bold">* </span>
+                  This track is in demo form and has not yet been professionally mixed or mastered.
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
+
 
       {/* Contact Section */}
       <section className="py-16 px-4">
@@ -194,12 +275,58 @@ export default function EPK() {
               <Mail className="w-5 h-5 text-muted-foreground" />
               <a
                 href="mailto:mifzalmusic@gmail.com"
-                className="text-foreground hover:text-primary transition-colors"
+                className="text-muted-foreground hover:text-primary transition-colors"
               >
                 mifzalmusic@gmail.com
               </a>
+              <button
+                onClick={() => copyToClipboard('mifzalmusic@gmail.com')}
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <Copy className="w-4 h-4" />
+              </button>
             </div>
 
+            <div className="my-8">
+              <div className="flex items-center justify-center gap-4">
+                <div className="h-px bg-border flex-1"></div>
+                <span className="text-muted-foreground text-sm">OR</span>
+                <div className="h-px bg-border flex-1"></div>
+              </div>
+            </div>
+
+            <form
+              action="https://formspree.io/f/mnngaqyb"
+              method="POST"
+              className="flex flex-col max-w-2xl mx-auto gap-4"
+            >
+              <input
+                type="text"
+                name="name"
+                placeholder="Name"
+                required
+                className="border rounded px-3 py-2 w-full"
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                required
+                className="border rounded px-3 py-2 w-full"
+              />
+              <textarea
+                name="message"
+                placeholder="Send a message"
+                required
+                className="border rounded px-3 py-2 w-full h-32"
+              ></textarea>
+              <button
+                type="submit"
+                className="bg-white text-black px-4 py-2 rounded hover:bg-black hover:text-white cursor-pointer transition-colors border border-black"
+              >
+                Send
+              </button>
+            </form>
 
           </div>
         </div>

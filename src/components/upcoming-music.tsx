@@ -21,7 +21,7 @@ const upcomingReleases = [
     description: "An instrumental progressive track blending cinematic textures, melodic guitar work, and neoclassical influences which exists together as a conceptual suite version that flows seamlessly from start to finish.",
     genre: "Progressive/Orchestral",
     duration: "~9:00",
-    tracks: ["Sapphire", "Pieces of A Vague Ceremony", "Vita (Reimagined)"]
+    tracks: ["Sapphire", "Pieces of The Vague Ceremony", "Vita (Reimagined)"]
   },
  
 ]
