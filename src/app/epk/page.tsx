@@ -159,6 +159,15 @@ export default function EPK() {
         </div>
       </section>
 
+      <section className="py-16 px-4">  
+        <div className="container mx-auto max-w-3xl">
+          <h2 className="text-2xl font-light mb-8 tracking-wider">FOR FANS OF</h2>
+          <p className="space-y-6 leading-relaxed text-muted-foreground">
+              David Maxim Micic, Plini, Ludovico Einaudi, Ludwig Göransson, and Aaron Hibell.
+            </p>
+        </div>
+      </section>
+
      
 
       {/* Music Embed */}
@@ -279,7 +288,7 @@ export default function EPK() {
         <div className="container mx-auto max-w-3xl">
           <h2 className="text-2xl font-light mb-8 tracking-wider">PRESS PHOTOS</h2>
           <p className="space-y-6 leading-relaxed text-muted-foreground">
-           COMING SOON.
+           Coming soon.
           </p>
         </div>
       </section>
@@ -319,6 +328,7 @@ export default function EPK() {
               method="POST"
               className="flex flex-col max-w-2xl mx-auto gap-4"
             >
+              <p className="text-muted-foreground text-sm">Fill in the form directly.</p>
               <input
                 type="text"
                 name="name"
@@ -345,6 +355,7 @@ export default function EPK() {
               >
                 Send
               </button>
+              <p className="text-muted-foreground text-sm mx-auto">Powered by Formspree.</p>
             </form>
 
           </div>
