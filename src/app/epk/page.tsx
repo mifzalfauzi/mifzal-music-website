@@ -68,7 +68,9 @@ export default function EPK() {
               <div className="flex gap-6 pt-6">
 
                 <a
-                  href="#"
+                  href="https://instagram.com/mifzalv"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center gap-2 text-muted-foreground hover:text-pink-500 transition-colors"
                   aria-label="Instagram"
                 >
@@ -76,7 +78,9 @@ export default function EPK() {
                   {/* <span>Instagram</span> */}
                 </a>
                 <a
-                  href="#"
+                  href="https://open.spotify.com/artist/3HqfM3Xk0a0J6xZJvjQfkj?si=otfwPuotR9ie9llUoMyOxw"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center gap-2 text-muted-foreground hover:text-green-500 transition-colors"
                   aria-label="Spotify"
                 >
@@ -86,15 +90,17 @@ export default function EPK() {
                   {/* <span>Spotify</span> */}
                 </a>
                 <a
-                  href="#"
+                  href="https://youtube.com/@mifzals"
                   className="flex items-center gap-2 text-muted-foreground hover:text-pink-500 transition-colors"
                   aria-label="Youtube"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <Youtube className="w-5 h-5" />
                   {/* <span>Instagram</span> */}
                 </a>
                 <a
-                  href="https://bandcamp.com/"
+                  href="https://mifzal.bandcamp.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-blue-400 dark:hover:text-blue-400 transition-colors"
@@ -121,6 +127,8 @@ export default function EPK() {
           </div>
         </div>
       </section>
+
+
 
       {/* Short Bio */}
       <section className="py-16 px-4">
@@ -150,6 +158,8 @@ export default function EPK() {
           </div>
         </div>
       </section>
+
+     
 
       {/* Music Embed */}
       <section className="py-16 px-4">
@@ -262,6 +272,15 @@ export default function EPK() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="py-16 px-4">
+        <div className="container mx-auto max-w-3xl">
+          <h2 className="text-2xl font-light mb-8 tracking-wider">PRESS PHOTOS</h2>
+          <p className="space-y-6 leading-relaxed text-muted-foreground">
+           COMING SOON.
+          </p>
         </div>
       </section>
 
