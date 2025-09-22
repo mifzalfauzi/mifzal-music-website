@@ -100,8 +100,8 @@ export default function EPK() {
       <section className="py-16 px-4">
         <div className="container mx-auto max-w-3xl">
           <h2 className="text-2xl font-light mb-8 tracking-wider">ARTIST OVERVIEW</h2>
-          <p className="text-lg leading-relaxed text-muted-foreground">
-            Mifzal is a 23 year old emerging composer from Malaysia, crafting cinematic progressive music that blends atmospheric textures with melodic guitar-driven and orchestral compositions. His work explores the intersection of ambient soundscapes and intricate progressive arrangements, creating immersive musical narratives.
+          <p className="space-y-6 leading-relaxed text-muted-foreground">
+            Mifzal, 23, is an emerging composer from Malaysia, crafting cinematic progressive music that blends atmospheric textures with melodic guitar-driven and orchestral compositions. His work explores the intersection of ambient soundscapes and intricate progressive arrangements, creating immersive musical narratives.
           </p>
         </div>
       </section>
@@ -112,10 +112,11 @@ export default function EPK() {
           <h2 className="text-2xl font-light mb-8 tracking-wider">MUSICAL VISION</h2>
           <div className="space-y-6 text-muted-foreground leading-relaxed">
             <p>
-              Drawing inspiration from the melodic sophistication of Plini, the technical innovation of David Maxim Micic, and the emotive storytelling of Ludovico Einaudi, Mifzal creates music that transcends traditional genre boundaries. His compositions seamlessly weave together progressive guitar techniques with cinematic orchestration, resulting in deeply atmospheric and emotionally resonant pieces.
+            Mifzal creates music that transcends traditional genre boundaries, seamlessly weaving progressive guitar techniques with cinematic orchestration to craft deeply atmospheric and emotionally resonant pieces.
+
             </p>
             <p>
-              The cornerstone of his artistic vision is the "Sapphire" concept - a musical exploration of crystalline beauty and structural complexity. "Tales of Sapphire" represents this vision in its fullest form: a multi-movement suite that flows seamlessly from intimate guitar passages to sweeping orchestral arrangements, telling a complete narrative through instrumental composition alone.
+              The cornerstone of his artistic vision is the "Sapphire" concept - a musical exploration of cinematic melodies and atmospherical textures. "Tales of Sapphire" represents this vision in its fullest form: a multi-movement suite that flows seamlessly from intimate guitar passages to sweeping orchestral arrangements, telling a complete narrative through instrumental composition alone.
             </p>
             <p>
               Through this conceptual framework, Mifzal aims to create music that serves as both technical showcase and emotional journey, inviting listeners into carefully crafted sonic worlds that reveal new details with each listen.
@@ -189,7 +190,7 @@ export default function EPK() {
         <div className="container mx-auto max-w-3xl">
           <h2 className="text-2xl font-light mb-8 tracking-wider">CONTACT</h2>
           <div className="space-y-6">
-            <div className="flex items-center gap-3 text-lg">
+            <div className="flex items-center gap-3 text-md">
               <Mail className="w-5 h-5 text-muted-foreground" />
               <a
                 href="mailto:mifzalmusic@gmail.com"
