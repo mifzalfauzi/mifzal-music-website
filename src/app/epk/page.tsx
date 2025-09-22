@@ -385,7 +385,7 @@ export default function EPK() {
               action="https://formspree.io/f/mnngaqyb"
               method="POST"
               onSubmit={handleSubmit}
-              className="flex flex-col max-w-2xl mx-auto gap-4"
+              className="flex flex-col w-full gap-4"
             >
               <p className="text-muted-foreground text-sm">Fill in the form directly.</p>
               <input
@@ -435,32 +435,49 @@ export default function EPK() {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-black text-white p-6 rounded-lg max-w-md w-full mx-4">
             <h3 className="text-lg font-light mb-4">Confirm Your Message</h3>
-            <div className="space-y-3 text-sm">
+            <div className="space-y-3 text-sm text-left">
               <div>
-                <strong>Name:</strong> {formData.name}
+                <p className="text-muted-foreground text-md">Name</p>
+                <input
+                  type="text"
+                  value={formData.name}
+                  readOnly
+                  className="mt-1 p-2 bg-black rounded text-md w-full cursor-not-allowed"
+                />
               </div>
+
               <div>
-                <strong>Email:</strong> {formData.email}
+                <p className="text-muted-foreground text-md">Email</p>
+                <input
+                  type="email"
+                  value={formData.email}
+                  readOnly
+                  className="mt-1 p-2 bg-black rounded text-md w-full cursor-not-allowed"
+                />
               </div>
+
               <div>
-                <strong>Message:</strong>
-                <p className="mt-1 p-2 bg-black rounded text-xs max-h-32 overflow-y-auto">
-                  {formData.message}
-                </p>
+                <p className="text-muted-foreground text-md">Message</p>
+                <textarea
+                  value={formData.message}
+                  readOnly
+                  className="mt-1 p-2 bg-black rounded text-md w-full h-32 resize-none cursor-not-allowed overflow-y-auto"
+                />
               </div>
             </div>
-            <div className="flex gap-3 mt-6">
-              <button
-                onClick={confirmSubmit}
-                className="flex-1 bg-white text-black px-4 py-2 rounded hover:bg-gray-800 transition-colors"
-              >
-                Send Message
-              </button>
+            <div className="flex gap-3">
+             
               <button
                 onClick={() => setShowModal(false)}
-                className="flex-1 border border-white px-4 py-2 rounded hover:bg-gray-100 transition-colors"
+                className="flex-1 border border-white px-4 py-2 rounded hover:bg-white hover:text-black transition-colors cursor-pointer"
               >
                 Cancel
+              </button>
+              <button
+                onClick={confirmSubmit}
+                className="flex-1 bg-white text-black px-4 py-2 rounded hover:bg-black hover:text-white transition-colors cursor-pointer"
+              >
+                Send Message
               </button>
             </div>
           </div>

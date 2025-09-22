@@ -1,5 +1,6 @@
 import { Mail, Copy, Check, Instagram } from "lucide-react"
 import { useState } from "react"
+import emailjs from '@emailjs/browser';
 
 interface FormData {
   name: string;
@@ -10,7 +11,9 @@ interface FormData {
 export default function Contact() {
   const [copied, setCopied] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [formData, setFormData] = useState<FormData>({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [success, setSuccess] = useState(false);
+  
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -18,24 +21,42 @@ export default function Contact() {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   const form = e.target as HTMLFormElement;
+  //   const formData = new FormData(form);
+
+  //   setFormData({
+  //     name: formData.get('name') as string,
+  //     email: formData.get('email') as string,
+  //     message: formData.get('message') as string,
+  //   });
+  //   setShowModal(true);
+  // };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = e.target as HTMLFormElement;
-    const formData = new FormData(form);
-
-    setFormData({
-      name: formData.get('name') as string,
-      email: formData.get('email') as string,
-      message: formData.get('message') as string,
-    });
-    setShowModal(true);
+    setShowModal(true); // open confirmation modal
   };
-
+  
   const confirmSubmit = () => {
-    const form = document.getElementById('contact-form') as HTMLFormElement;
-    setShowModal(false);
-    form.submit();
+    emailjs.send(
+      'service_rp7z9mf',     // replace with your EmailJS Service ID
+      'template_a6eisf8',    // replace with your Template ID
+      formData,
+      'EJPGR-7Zd6ABDOl_Y'    // replace with your Public Key
+    ).then(() => {
+      setSuccess(true);
+      setFormData({ name: '', email: '', message: '' });
+      setShowModal(false);
+    }).catch((err) => {
+      console.error('EmailJS error:', err);
+      setShowModal(false);
+    });
   };
+  
+
+
 
   return (
     <div className="container mx-auto px-4 text-center">
@@ -82,25 +103,28 @@ export default function Contact() {
       >
         <p className="text-muted-foreground text-sm">Fill in the form directly.</p>
         <input
-          type="text"
-          name="name"
-          placeholder="Your Name"
-          required
-          className="border rounded px-3 py-2 w-full"
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Your Email"
-          required
-          className="border rounded px-3 py-2 w-full"
-        />
-        <textarea
-          name="message"
-          placeholder="Send a message"
-          required
-          className="border rounded px-3 py-2 w-full h-32"
-        ></textarea>
+        type="text"
+        placeholder="Your Name"
+        value={formData.name}
+        onChange={e => setFormData({ ...formData, name: e.target.value })}
+        required
+        className="border rounded px-3 py-2"
+      />
+      <input
+        type="email"
+        placeholder="Your Email"
+        value={formData.email}
+        onChange={e => setFormData({ ...formData, email: e.target.value })}
+        required
+        className="border rounded px-3 py-2"
+      />
+      <textarea
+        placeholder="Your Message"
+        value={formData.message}
+        onChange={e => setFormData({ ...formData, message: e.target.value })}
+        required
+        className="border rounded px-3 py-2"
+      />
         <button
           type="submit"
           className="bg-white text-black px-4 py-2 rounded hover:bg-black hover:text-white cursor-pointer transition-colors border border-black"
