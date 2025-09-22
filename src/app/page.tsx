@@ -68,7 +68,7 @@ export default function Home() {
 
 <motion.section 
           id="about" 
-          className="py-16"
+          className="py-12 md:py-20"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: false, margin: "-100px" }}
@@ -79,7 +79,7 @@ export default function Home() {
 
         <motion.section 
           id="music" 
-          className="py-8 md:py-16"
+          className="py-12 md:py-20"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: false, margin: "-100px" }}
@@ -90,7 +90,7 @@ export default function Home() {
 
         <motion.section 
           id="upcoming-music" 
-          className="py-8 md:py-16"
+          className="py-12 md:py-20"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: false, margin: "-100px" }}
@@ -111,7 +111,7 @@ export default function Home() {
         </motion.section> */}
         <motion.section 
           id="contact" 
-          className="py-8 md:py-16"
+          className="py-12 md:py-20"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: false, margin: "-100px" }}

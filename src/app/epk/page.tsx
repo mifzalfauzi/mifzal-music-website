@@ -323,8 +323,10 @@ export default function EPK() {
         <div className="container mx-auto max-w-3xl">
           <h2 className="text-lg md:text-2xl font-light mb-8 tracking-wider">CONTACT</h2>
           <div className="space-y-6">
+            <p className="text-muted-foreground text-sm md:text-sm"> Click email to send or copy.</p>
             <div className="flex items-center gap-3 text-md">
-              <Mail className="w-4 h-4 md:w-5 md:h-5 text-muted-foreground" />
+              <Mail className="w-4 h-4 md:w-5 md:h-5 text-foreground" />
+             
               <a
                 href="mailto:mifzalmusic@gmail.com"
                 className="text-muted-foreground hover:text-primary transition-colors text-sm md:text-base"

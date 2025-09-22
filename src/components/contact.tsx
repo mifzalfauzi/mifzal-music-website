@@ -16,11 +16,13 @@ export default function Contact() {
       
       <div className="mb-8">
         {/* <p className="text-lg mb-4">Get in touch directly:</p> */}
+        <p className="text-muted-foreground text-sm md:text-sm mb-8"> Click email to send or copy.</p>
         <div className="flex justify-center items-center gap-3">
-          <Mail className="w-4 h-4 md:w-5 md:h-5 text-muted-foreground" />
+          
+          <Mail className="w-4 h-4 md:w-5 md:h-5 text-foreground" />
           <a
             href="mailto:mifzalmusic@gmail.com"
-            className="text-sm md:text-base text-foreground hover:text-primary transition-colors"
+            className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors"
           >
             mifzalmusic@gmail.com
           </a>
