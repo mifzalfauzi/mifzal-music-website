@@ -1,8 +1,16 @@
 import { Mail, Copy, Check, Instagram } from "lucide-react"
 import { useState } from "react"
 
+interface FormData {
+  name: string;
+  email: string;
+  message: string;
+}
+
 export default function Contact() {
   const [copied, setCopied] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [formData, setFormData] = useState<FormData>({ name: '', email: '', message: '' });
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -10,15 +18,34 @@ export default function Contact() {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+
+    setFormData({
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      message: formData.get('message') as string,
+    });
+    setShowModal(true);
+  };
+
+  const confirmSubmit = () => {
+    const form = document.getElementById('contact-form') as HTMLFormElement;
+    setShowModal(false);
+    form.submit();
+  };
+
   return (
     <div className="container mx-auto px-4 text-center">
       <h2 className="text-lg md:text-3xl font-light mb-12 tracking-wider">CONTACT</h2>
-      
+
       <div className="mb-8">
         {/* <p className="text-lg mb-4">Get in touch directly:</p> */}
         <p className="text-muted-foreground text-sm md:text-sm mb-8"> Click email to send or copy.</p>
         <div className="flex justify-center items-center gap-3">
-          
+
           <Mail className="w-4 h-4 md:w-5 md:h-5 text-foreground" />
           <a
             href="mailto:mifzalmusic@gmail.com"
@@ -28,11 +55,10 @@ export default function Contact() {
           </a>
           <button
             onClick={() => copyToClipboard('mifzalmusic@gmail.com')}
-            className={`transition-colors text-sm md:text-base cursor-pointer ${
-              copied 
-                ? 'text-green-500' 
+            className={`transition-colors text-sm md:text-base cursor-pointer ${copied
+                ? 'text-green-500'
                 : 'text-muted-foreground hover:text-foreground'
-            }`}
+              }`}
           >
             {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
           </button>
@@ -48,22 +74,24 @@ export default function Contact() {
       </div>
 
       <form
+        id="contact-form"
         action="https://formspree.io/f/mnngaqyb"// replace with your Formspree form ID
         method="POST"
+        onSubmit={handleSubmit}
         className="flex flex-col max-w-3xl mx-auto gap-4"
       >
-         <p className="text-muted-foreground text-sm">Fill in the form directly.</p>
+        <p className="text-muted-foreground text-sm">Fill in the form directly.</p>
         <input
           type="text"
           name="name"
-          placeholder="Name"
+          placeholder="Your Name"
           required
           className="border rounded px-3 py-2 w-full"
         />
         <input
           type="email"
           name="email"
-          placeholder="Email"
+          placeholder="Your Email"
           required
           className="border rounded px-3 py-2 w-full"
         />
@@ -83,13 +111,67 @@ export default function Contact() {
       </form>
 
       <div className="mt-8 flex items-center justify-center gap-2">
-      <Instagram className="w-4 h-4" />
+        <Instagram className="w-4 h-4" />
         <p className="text-muted-foreground text-sm"><a href="https://instagram.com/mifzalv" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors text-sm md:text-sm">
-        say hello on Instagram
+          say hello on Instagram
         </a></p>
-        
+
       </div>
-      
+
+      {/* Confirmation Modal */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-black text-white p-6 rounded-lg max-w-md w-full mx-4">
+            <h3 className="text-lg font-light mb-4">Confirm Your Message</h3>
+            <div className="space-y-3 text-sm text-left">
+              <div>
+                <p className="text-muted-foreground text-md">Name</p>
+                <input
+                  type="text"
+                  value={formData.name}
+                  readOnly
+                  className="mt-1 p-2 bg-black rounded text-md w-full cursor-not-allowed"
+                />
+              </div>
+
+              <div>
+                <p className="text-muted-foreground text-md">Email</p>
+                <input
+                  type="email"
+                  value={formData.email}
+                  readOnly
+                  className="mt-1 p-2 bg-black rounded text-md w-full cursor-not-allowed"
+                />
+              </div>
+
+              <div>
+                <p className="text-muted-foreground text-md">Message</p>
+                <textarea
+                  value={formData.message}
+                  readOnly
+                  className="mt-1 p-2 bg-black rounded text-md w-full h-32 resize-none cursor-not-allowed overflow-y-auto"
+                />
+              </div>
+            </div>
+            <div className="flex gap-3">
+             
+              <button
+                onClick={() => setShowModal(false)}
+                className="flex-1 border border-white px-4 py-2 rounded hover:bg-white hover:text-black transition-colors cursor-pointer"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={confirmSubmit}
+                className="flex-1 bg-white text-black px-4 py-2 rounded hover:bg-black hover:text-white transition-colors cursor-pointer"
+              >
+                Send Message
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   )
 }

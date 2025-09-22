@@ -26,13 +26,40 @@ const statusColors = {
   "Conceptual": "text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-900/20",
 }
 
+interface FormData {
+  name: string;
+  email: string;
+  message: string;
+}
+
 export default function EPK() {
   const [copied, setCopied] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [formData, setFormData] = useState<FormData>({ name: '', email: '', message: '' });
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+    
+    setFormData({
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      message: formData.get('message') as string,
+    });
+    setShowModal(true);
+  };
+
+  const confirmSubmit = () => {
+    const form = document.getElementById('epk-contact-form') as HTMLFormElement;
+    setShowModal(false);
+    form.submit();
   };
 
   return (
@@ -354,22 +381,24 @@ export default function EPK() {
             </div>
 
             <form
+              id="epk-contact-form"
               action="https://formspree.io/f/mnngaqyb"
               method="POST"
+              onSubmit={handleSubmit}
               className="flex flex-col max-w-2xl mx-auto gap-4"
             >
               <p className="text-muted-foreground text-sm">Fill in the form directly.</p>
               <input
                 type="text"
                 name="name"
-                placeholder="Name"
+                placeholder="Your Name"
                 required
                 className="border rounded px-3 py-2 w-full"
               />
               <input
                 type="email"
                 name="email"
-                placeholder="Email"
+                placeholder="Your Email"
                 required
                 className="border rounded px-3 py-2 w-full"
               />
@@ -400,6 +429,43 @@ export default function EPK() {
           </p>
         </div>
       </footer>
+
+      {/* Confirmation Modal */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-black text-white p-6 rounded-lg max-w-md w-full mx-4">
+            <h3 className="text-lg font-light mb-4">Confirm Your Message</h3>
+            <div className="space-y-3 text-sm">
+              <div>
+                <strong>Name:</strong> {formData.name}
+              </div>
+              <div>
+                <strong>Email:</strong> {formData.email}
+              </div>
+              <div>
+                <strong>Message:</strong>
+                <p className="mt-1 p-2 bg-black rounded text-xs max-h-32 overflow-y-auto">
+                  {formData.message}
+                </p>
+              </div>
+            </div>
+            <div className="flex gap-3 mt-6">
+              <button
+                onClick={confirmSubmit}
+                className="flex-1 bg-white text-black px-4 py-2 rounded hover:bg-gray-800 transition-colors"
+              >
+                Send Message
+              </button>
+              <button
+                onClick={() => setShowModal(false)}
+                className="flex-1 border border-white px-4 py-2 rounded hover:bg-gray-100 transition-colors"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
