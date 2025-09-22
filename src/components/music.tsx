@@ -6,7 +6,7 @@ import { Play, ChevronLeft, ChevronRight, Music as MusicIcon, Youtube } from "lu
 import { Button } from "@/components/ui/button"
 
 const musicReleases = [
-  
+
   {
     title: "Intervallum",
     type: "Single",
@@ -14,8 +14,8 @@ const musicReleases = [
     cover: "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02a095dbc29c017745bcb14714  ",
     spotifyUrl: "https://open.spotify.com/",
     appleMusicUrl: "https://music.apple.com/",
-    bandcampUrl: "https://bandcamp.com/",
-    youtubeUrl: "https://www.youtube.com/watch?v=4TbPxJ5jUspuAN8sUZQSCs",
+    bandcampUrl: "",
+    youtubeUrl: "https://www.youtube.com/watch?v=dNUUFbxIXVE",
     spotifyEmbedId: "4TbPxJ5jUspuAN8sUZQSCs", // Add your Spotify track/album ID here
     isReleased: true,
     tracks: [
@@ -38,7 +38,7 @@ const musicReleases = [
       { title: "Vita", duration: "4:05" },
     ],
   },
-  
+
   {
     title: "Leocasia",
     type: "Multi-track Single",
@@ -46,8 +46,8 @@ const musicReleases = [
     cover: "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0228f2b587dfb595dbb5830547",
     spotifyUrl: "https://open.spotify.com/",
     appleMusicUrl: "https://music.apple.com/",
-    bandcampUrl: "https://bandcamp.com/",
-    youtubeUrl: "https://www.youtube.com/watch?v=5Unfq5dxYK013BQzsCNoJQ",
+    bandcampUrl: "https://mifzal.bandcamp.com/album/leocasia",
+    youtubeUrl: "https://youtu.be/U47t_OKp5Z4?si=f8lTk7aha0GMTGbN",
     spotifyEmbedId: "2rVkgIahZhBbeEPsqQLkwr", // Add your Spotify track/album ID here
     isReleased: true,
     tracks: [
@@ -151,7 +151,7 @@ export default function Music() {
   const handleTouchEnd = () => {
     setIsPaused(false)
     if (!touchStart || !touchEnd) return
-    
+
     const distance = touchStart - touchEnd
     const isLeftSwipe = distance > 50
     const isRightSwipe = distance < -50
@@ -170,7 +170,7 @@ export default function Music() {
 
       <div className="relative max-w-7xl mx-auto">
         {/* Navigation arrows for mobile/tablet */}
-        {activeIndex !== 0 && (
+        {/* {activeIndex !== 0 && (
           <button
             onClick={showPrevRelease}
             className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 bg-background/90 hover:bg-background border border-border rounded-full p-2 shadow-lg md:hidden"
@@ -188,7 +188,7 @@ export default function Music() {
           >
             <ChevronRight size={20} />
           </button>
-        )}
+        )} */}
 
         {/* Carousel with simple scale animations */}
         <div
@@ -241,9 +241,8 @@ export default function Music() {
                 {musicReleases[activeIndex].isReleased && musicReleases[activeIndex].spotifyEmbedId ? (
                   <iframe
                     style={{ borderRadius: "13px" }}
-                    src={`https://open.spotify.com/embed/${
-                      musicReleases[activeIndex].type !== "Single" ? "album" : "track"
-                    }/${musicReleases[activeIndex].spotifyEmbedId}?utm_source=generator&theme=0`}
+                    src={`https://open.spotify.com/embed/${musicReleases[activeIndex].type !== "Single" ? "album" : "track"
+                      }/${musicReleases[activeIndex].spotifyEmbedId}?utm_source=generator&theme=0`}
                     width="100%"
                     height={musicReleases[activeIndex].type === "Single" ? 352 : 370}
                     frameBorder="0"
@@ -270,15 +269,16 @@ export default function Music() {
                   </div>
 
                   <div className="flex space-x-3">
-                    <a
-                      href={musicReleases[activeIndex].youtubeUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-muted-foreground hover:text-red-500 transition-colors"
-                      aria-label="Listen on Youtube"
-                    >
-                      <Youtube className="w-4 h-4" />
-                    </a>
+                    {musicReleases[activeIndex].youtubeUrl != "" && (
+                      <a
+                        href={musicReleases[activeIndex].youtubeUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-muted-foreground hover:text-red-500 transition-colors"
+                        aria-label="Listen on Youtube"
+                      >
+                        <Youtube className="w-4 h-4" />
+                      </a>)}
                     {/* <a
                       href={musicReleases[activeIndex].appleMusicUrl}
                       target="_blank"
@@ -288,17 +288,20 @@ export default function Music() {
                     >
                       <MusicIcon className="w-4 h-4" />
                     </a> */}
-                    <a
-                      href={musicReleases[activeIndex].bandcampUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-muted-foreground hover:text-blue-500 transition-colors"
-                      aria-label="Listen on Bandcamp"
-                    >
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8.5 21l7.5-18h-7.5l-7.5 18z" fill="currentColor" />
-                      </svg>
-                    </a>
+                    {musicReleases[activeIndex].bandcampUrl != "" && (
+                      <a
+                        href={musicReleases[activeIndex].bandcampUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-muted-foreground hover:text-blue-500 transition-colors"
+                        aria-label="Listen on Bandcamp"
+                      >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M8.5 21l7.5-18h-7.5l-7.5 18z" fill="currentColor" />
+                        </svg>
+                      </a>
+                    )}
+
                   </div>
                 </div>
               </div>

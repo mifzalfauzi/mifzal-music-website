@@ -41,6 +41,7 @@ export default function Contact() {
         method="POST"
         className="flex flex-col max-w-3xl mx-auto gap-4"
       >
+         <p className="text-muted-foreground text-sm">Fill in the form directly.</p>
         <input
           type="text"
           name="name"
@@ -67,7 +68,9 @@ export default function Contact() {
         >
           Send
         </button>
+        <p className="text-muted-foreground text-sm mx-auto">Powered by Formspree</p>
       </form>
+      
     </div>
   )
 }
