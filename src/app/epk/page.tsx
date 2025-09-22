@@ -38,6 +38,8 @@ export default function EPK() {
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
     setCopied(true);
@@ -50,6 +52,7 @@ export default function EPK() {
   };
   
   const confirmSubmit = () => {
+    setIsSubmitting(true);
     emailjs.send(
       'service_rp7z9mf',     // replace with your EmailJS Service ID
       'template_ct811wu',    // replace with your Template ID
@@ -59,11 +62,48 @@ export default function EPK() {
       setSuccess(true);
       setFormData({ name: '', email: '', message: '' });
       setShowModal(false);
+      setIsSubmitting(false);
     }).catch((err) => {
       console.error('EmailJS error:', err);
+      setError(true);
       setShowModal(false);
+      setIsSubmitting(false);
     });
   };
+
+  if (success) {
+    return (
+      <div className="min-h-screen bg-background flex flex-col justify-center items-center">
+        <div className="max-w-md mx-auto text-center">
+          <h2 className="text-2xl font-light mb-6 tracking-wider text-green-500">MESSAGE SENT!</h2>
+          <p className="text-muted-foreground mb-8">Thank you for reaching out.</p>
+          <button
+            onClick={() => setSuccess(false)}
+            className="cursor-pointer bg-white text-black px-6 py-2 rounded hover:bg-black hover:text-white transition-colors border border-black"
+          >
+            Go Back to EPK
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-background flex flex-col justify-center items-center">
+        <div className="max-w-md mx-auto text-center">
+          <h2 className="text-2xl font-light mb-6 tracking-wider text-red-500">MESSAGE FAILED</h2>
+          <p className="text-muted-foreground mb-8">Something went wrong. Please try again or contact me directly at mifzalmusic@gmail.com</p>
+          <button
+            onClick={() => setError(false)}
+            className="cursor-pointer bg-white text-black px-6 py-2 rounded hover:bg-black hover:text-white transition-colors border border-black"
+          >
+            Go Back to EPK
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -481,9 +521,17 @@ export default function EPK() {
               </button>
               <button
                 onClick={confirmSubmit}
-                className="flex-1 bg-white text-black px-4 py-2 rounded hover:bg-black hover:text-white transition-colors cursor-pointer"
+                disabled={isSubmitting}
+                className="flex-1 bg-white text-black px-4 py-2 rounded hover:bg-black hover:text-white transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
               >
-                Send Message
+                {isSubmitting ? (
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
+                    Sending...
+                  </div>
+                ) : (
+                  'Send Message'
+                )}
               </button>
             </div>
           </div>
