@@ -3,6 +3,7 @@
 import { Mail, Music, Instagram, ExternalLink, Youtube, Copy, Check } from "lucide-react"
 import Image from "next/image"
 import { useState } from "react"
+import emailjs from '@emailjs/browser';
 
 const upcomingReleases = [
 
@@ -35,8 +36,8 @@ interface FormData {
 export default function EPK() {
   const [copied, setCopied] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [formData, setFormData] = useState<FormData>({ name: '', email: '', message: '' });
-
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [success, setSuccess] = useState(false);
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
     setCopied(true);
@@ -45,21 +46,23 @@ export default function EPK() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = e.target as HTMLFormElement;
-    const formData = new FormData(form);
-    
-    setFormData({
-      name: formData.get('name') as string,
-      email: formData.get('email') as string,
-      message: formData.get('message') as string,
-    });
-    setShowModal(true);
+    setShowModal(true); // open confirmation modal
   };
-
+  
   const confirmSubmit = () => {
-    const form = document.getElementById('epk-contact-form') as HTMLFormElement;
-    setShowModal(false);
-    form.submit();
+    emailjs.send(
+      'service_rp7z9mf',     // replace with your EmailJS Service ID
+      'template_ct811wu',    // replace with your Template ID
+      formData,
+      'EJPGR-7Zd6ABDOl_Y'    // replace with your Public Key
+    ).then(() => {
+      setSuccess(true);
+      setFormData({ name: '', email: '', message: '' });
+      setShowModal(false);
+    }).catch((err) => {
+      console.error('EmailJS error:', err);
+      setShowModal(false);
+    });
   };
 
   return (
@@ -381,41 +384,44 @@ export default function EPK() {
             </div>
 
             <form
-              id="epk-contact-form"
-              action="https://formspree.io/f/mnngaqyb"
-              method="POST"
-              onSubmit={handleSubmit}
-              className="flex flex-col w-full gap-4"
-            >
-              <p className="text-muted-foreground text-sm">Fill in the form directly.</p>
-              <input
-                type="text"
-                name="name"
-                placeholder="Your Name"
-                required
-                className="border rounded px-3 py-2 w-full"
-              />
-              <input
-                type="email"
-                name="email"
-                placeholder="Your Email"
-                required
-                className="border rounded px-3 py-2 w-full"
-              />
-              <textarea
-                name="message"
-                placeholder="Send a message"
-                required
-                className="border rounded px-3 py-2 w-full h-32"
-              ></textarea>
-              <button
-                type="submit"
-                className="bg-white text-black px-4 py-2 rounded hover:bg-black hover:text-white cursor-pointer transition-colors border border-black"
-              >
-                Send
-              </button>
-              <p className="text-muted-foreground text-sm mx-auto">Powered by Formspree</p>
-            </form>
+        id="contact-form"
+        action="https://formspree.io/f/mnngaqyb"// replace with your Formspree form ID
+        method="POST"
+        onSubmit={handleSubmit}
+        className="flex flex-col max-w-3xl mx-auto gap-4"
+      >
+        <p className="text-muted-foreground text-sm">Fill in the form directly.</p>
+        <input
+        type="text"
+        placeholder="Your Name"
+        value={formData.name}
+        onChange={e => setFormData({ ...formData, name: e.target.value })}
+        required
+        className="border rounded px-3 py-2"
+      />
+      <input
+        type="email"
+        placeholder="Your Email"
+        value={formData.email}
+        onChange={e => setFormData({ ...formData, email: e.target.value })}
+        required
+        className="border rounded px-3 py-2"
+      />
+      <textarea
+        placeholder="Your Message"
+        value={formData.message}
+        onChange={e => setFormData({ ...formData, message: e.target.value })}
+        required
+        className="border rounded px-3 py-2"
+      />
+        <button
+          type="submit"
+          className="bg-white text-black px-4 py-2 rounded hover:bg-black hover:text-white cursor-pointer transition-colors border border-black"
+        >
+          Send
+        </button>
+        <p className="text-muted-foreground text-sm mx-auto">Powered by Formspree</p>
+      </form>
 
           </div>
         </div>
