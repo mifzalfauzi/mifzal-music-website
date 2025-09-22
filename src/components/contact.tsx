@@ -1,8 +1,13 @@
-import { Mail, Copy } from "lucide-react"
+import { Mail, Copy, Check } from "lucide-react"
+import { useState } from "react"
 
 export default function Contact() {
+  const [copied, setCopied] = useState(false);
+
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
@@ -21,9 +26,13 @@ export default function Contact() {
           </a>
           <button
             onClick={() => copyToClipboard('mifzalmusic@gmail.com')}
-            className="text-muted-foreground hover:text-foreground transition-colors text-sm md:text-base"
+            className={`transition-colors text-sm md:text-base cursor-pointer ${
+              copied 
+                ? 'text-green-500' 
+                : 'text-muted-foreground hover:text-foreground'
+            }`}
           >
-            <Copy className="w-4 h-4" />
+            {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
           </button>
         </div>
       </div>
