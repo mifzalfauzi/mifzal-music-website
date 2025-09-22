@@ -131,7 +131,7 @@ export default function Contact() {
         >
           Send
         </button>
-        <p className="text-muted-foreground text-sm mx-auto">Powered by Formspree</p>
+        <p className="text-muted-foreground text-sm mx-auto">Powered by EmailJS</p>
       </form>
 
       <div className="mt-8 flex items-center justify-center gap-2">

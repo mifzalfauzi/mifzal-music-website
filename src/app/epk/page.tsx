@@ -385,7 +385,7 @@ export default function EPK() {
 
             <form
         id="contact-form"
-        action="https://formspree.io/f/mnngaqyb"// replace with your Formspree form ID
+        action="https://formspree.io/f/mnngaqyb"// replace with your EmailJS form ID
         method="POST"
         onSubmit={handleSubmit}
         className="flex flex-col max-w-3xl mx-auto gap-4"
@@ -420,7 +420,7 @@ export default function EPK() {
         >
           Send
         </button>
-        <p className="text-muted-foreground text-sm mx-auto">Powered by Formspree</p>
+        <p className="text-muted-foreground text-sm mx-auto">Powered by EmailJS</p>
       </form>
 
           </div>
