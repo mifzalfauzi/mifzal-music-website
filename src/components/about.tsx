@@ -2,7 +2,7 @@
 
 export default function About() {
   return (
-    <div className="container mx-auto px-4">
+    <div className="container mx-auto px-4 ">
       <h2 className="text-lg md:text-3xl font-light mb-12 text-center tracking-wider">ABOUT</h2>
 
       <p className="text-sm md:text-base text-muted-foreground leading-relaxed">

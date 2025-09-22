@@ -29,7 +29,7 @@ export default function Hero() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-[60vh] overflow-hidden bg-gradient-to-b from-gray-900 via-black to-gray-900"
+      className="relative w-full h-[40vh] md:h-[60vh] overflow-hidden bg-gradient-to-b from-gray-900 via-black to-gray-900"
     >
       <MobileNav />
 
@@ -41,7 +41,7 @@ export default function Hero() {
         src={image.src}
         alt={image.alt}
         fill
-        className="object-cover"
+        className="object-cover  object-top sm:object-center" 
         style={{
           objectPosition: index === 0 ? "50% 0%" : "50% 50%",
         }}

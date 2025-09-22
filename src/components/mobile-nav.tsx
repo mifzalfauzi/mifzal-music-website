@@ -26,13 +26,13 @@ export default function MobileNav() {
       </div>
 
       {isOpen && (
-        <div className="p-4 pb-6 bg-background border-b border-border shadow-md">
+        <div className="pl-4 absolute top-full left-0 w-full bg-transparent border-b border-border shadow-md">
           <nav className="mb-6">
             <ul className="space-y-4">
               <li>
                 <Link
                   href="#home"
-                  className="block text-foreground hover:text-muted-foreground transition-colors"
+                  className="block text-sm text-foreground hover:text-muted-foreground transition-colors"
                   onClick={toggleMenu}
                 >
                   HOME
@@ -40,26 +40,17 @@ export default function MobileNav() {
               </li>
               <li>
                 <Link
-                  href="#merch"
-                  className="block text-foreground hover:text-muted-foreground transition-colors"
+                  href="#about"
+                  className="block text-sm text-foreground hover:text-muted-foreground transition-colors"
                   onClick={toggleMenu}
                 >
-                  MERCH
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#shows"
-                  className="block text-foreground hover:text-muted-foreground transition-colors"
-                  onClick={toggleMenu}
-                >
-                  SHOWS
+                  ABOUT
                 </Link>
               </li>
               <li>
                 <Link
                   href="#music"
-                  className="block text-foreground hover:text-muted-foreground transition-colors"
+                  className="block text-sm text-foreground hover:text-muted-foreground transition-colors"
                   onClick={toggleMenu}
                 >
                   MUSIC
@@ -67,14 +58,23 @@ export default function MobileNav() {
               </li>
               <li>
                 <Link
-                  href="#band"
-                  className="block text-foreground hover:text-muted-foreground transition-colors"
+                  href="#upcoming-music"
+                  className="block text-sm text-foreground hover:text-muted-foreground transition-colors"
                   onClick={toggleMenu}
                 >
-                  MEMBERS
+                  UPCOMING
                 </Link>
               </li>
               <li>
+                <Link
+                  href="#contact"
+                  className="block text-sm text-foreground hover:text-muted-foreground transition-colors"
+                  onClick={toggleMenu}
+                >
+                  CONTACT
+                </Link>
+              </li>
+              {/* <li>
                 <Link
                   href="#newsletter"
                   className="block text-foreground hover:text-muted-foreground transition-colors"
@@ -82,49 +82,49 @@ export default function MobileNav() {
                 >
                   NEWSLETTER
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </nav>
 
           <div className="flex space-x-6">
             <Link
-              href="https://open.spotify.com/"
+              href="https://open.spotify.com/artist/3HqfM3Xk0a0J6xZJvjQfkj?si=otfwPuotR9ie9llUoMyOxw"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground hover:text-green-500 transition-colors"
+              className="text-sm text-foreground hover:text-green-500 transition-colors"
               aria-label="Spotify"
             >
-              <Music size={20} />
+              <Music size={16} />
             </Link>
             <Link
-              href="https://youtube.com/"
+              href="https://youtube.com/@mifzals"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground hover:text-red-500 transition-colors"
+              className="text-sm text-foreground hover:text-red-500 transition-colors"
               aria-label="YouTube"
             >
-              <Youtube size={20} />
+              <Youtube size={16} />
             </Link>
             <Link
-              href="https://instagram.com/"
+              href="https://instagram.com/mifzalv"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground hover:text-pink-500 transition-colors"
+              className="text-sm text-foreground hover:text-pink-500 transition-colors"
               aria-label="Instagram"
             >
-              <Instagram size={20} />
+              <Instagram size={16} />
             </Link>
             <Link
-              href="https://bandcamp.com/"
+              href="https://mifzal.bandcamp.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground hover:text-blue-500 transition-colors"
+              className="text-sm text-foreground hover:text-blue-500 transition-colors"
               aria-label="Bandcamp"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
