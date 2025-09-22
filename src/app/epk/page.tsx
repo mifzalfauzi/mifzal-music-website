@@ -4,7 +4,7 @@ import { Mail, Music, Instagram, ExternalLink, Youtube, Copy } from "lucide-reac
 import Image from "next/image"
 
 const upcomingReleases = [
-  
+
   {
     title: "Tales of Sapphire",
     type: "Multi-track Single",
@@ -16,7 +16,7 @@ const upcomingReleases = [
     tracks: ["Pieces of The Vague Ceremony", "Sapphire", "Vita (Reimagined)"],
     individualDuration: ["0:00 - 1:47", "1:48 - 5:47", "5:48 - 8:32"]
   },
- 
+
 ]
 
 const statusColors = {
@@ -56,12 +56,12 @@ export default function EPK() {
               </p>
               <div className="flex justify-center md:justify-start">
                 <a
-                  href="https://www.mifzal.com"
+                  href="https://www.mifzal.co"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-1 text-muted-foreground hover:text-white/80 transition-colors"
                 >
-                  <span>www.mifzal.com</span>
+                  <span>www.mifzal.co</span>
                   <ExternalLink className="w-4 h-4" />
                 </a>
               </div>
@@ -159,16 +159,16 @@ export default function EPK() {
         </div>
       </section>
 
-      <section className="py-16 px-4">  
+      <section className="py-16 px-4">
         <div className="container mx-auto max-w-3xl">
           <h2 className="text-2xl font-light mb-8 tracking-wider">FOR FANS OF</h2>
           <p className="space-y-6 leading-relaxed text-muted-foreground">
-              David Maxim Micic, Plini, Ludovico Einaudi, Ludwig Göransson, and Aaron Hibell.
-            </p>
+            David Maxim Micic, Plini, Ludovico Einaudi, Ludwig Göransson, and Aaron Hibell.
+          </p>
         </div>
       </section>
 
-     
+
 
       {/* Music Embed */}
       <section className="py-16 px-4">
@@ -286,9 +286,28 @@ export default function EPK() {
 
       <section className="py-16 px-4">
         <div className="container mx-auto max-w-3xl">
+          <h2 className="text-2xl font-light mb-8 tracking-wider">RELEASED TRACKS</h2>
+          <p className="leading-relaxed text-muted-foreground">
+  For previously released tracks and full discography, visit the Music section at{' '}<br/>
+  <a
+    href="https://mifzal.co"
+    className="text-foreground hover:text-primary transition-colors inline-flex items-center gap-1"
+  >
+    mifzal.co
+    <ExternalLink className="w-4 h-4 inline-block" />
+  </a>
+  .
+</p>
+
+
+        </div>
+      </section>
+
+      <section className="py-16 px-4">
+        <div className="container mx-auto max-w-3xl">
           <h2 className="text-2xl font-light mb-8 tracking-wider">PRESS PHOTOS</h2>
           <p className="space-y-6 leading-relaxed text-muted-foreground">
-           Coming soon.
+            Coming soon.
           </p>
         </div>
       </section>
