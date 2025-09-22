@@ -54,7 +54,7 @@ export default function Hero() {
 
 
       {/* Overlay gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/20 to-black/40 z-10 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/30 to-black/50 z-10 pointer-events-none" />
 
       {/* Navigation arrows */}
       {heroImages.length > 3 && (
