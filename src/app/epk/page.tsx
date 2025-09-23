@@ -3,7 +3,6 @@
 import { Mail, Music, Instagram, ExternalLink, Youtube, Copy, Check } from "lucide-react"
 import Image from "next/image"
 import { useState } from "react"
-import emailjs from '@emailjs/browser';
 
 const upcomingReleases = [
 
@@ -40,6 +39,7 @@ export default function EPK() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [validationError, setValidationError] = useState('');
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
     setCopied(true);
@@ -48,27 +48,45 @@ export default function EPK() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setValidationError(''); // Clear any previous validation errors
     setShowModal(true); // open confirmation modal
   };
   
-  const confirmSubmit = () => {
+  const confirmSubmit = async () => {
     setIsSubmitting(true);
-    emailjs.send(
-      'service_rp7z9mf',     // replace with your EmailJS Service ID
-      'template_ct811wu',    // replace with your Template ID
-      formData,
-      'EJPGR-7Zd6ABDOl_Y'    // replace with your Public Key
-    ).then(() => {
-      setSuccess(true);
-      setFormData({ name: '', email: '', message: '' });
-      setShowModal(false);
+    setValidationError('');
+    try {
+      const response = await fetch('http://localhost:8000/contact/epk', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        setSuccess(true);
+        setFormData({ name: '', email: '', message: '' });
+        setShowModal(false);
+        setIsSubmitting(false);
+      } else if (response.status === 422) {
+        // Validation error
+        const errorData = await response.json();
+        setValidationError(errorData.detail || 'Please check your input and try again.');
+        setShowModal(false);
+        setIsSubmitting(false);
+      } else {
+        throw new Error('Failed to send message');
+      }
+    } catch (err) {
+      console.error('API error:', err);
+      if (!validationError) {
+        setError(true);
+        setShowModal(false);
+      }
       setIsSubmitting(false);
-    }).catch((err) => {
-      console.error('EmailJS error:', err);
-      setError(true);
-      setShowModal(false);
-      setIsSubmitting(false);
-    });
+    }
   };
 
   if (success) {
@@ -425,12 +443,15 @@ export default function EPK() {
 
             <form
         id="contact-form"
-        action="https://formspree.io/f/mnngaqyb"// replace with your EmailJS form ID
-        method="POST"
         onSubmit={handleSubmit}
         className="flex flex-col max-w-3xl mx-auto gap-4"
       >
         <p className="text-muted-foreground text-sm">Fill in the form directly.</p>
+        {validationError && (
+          <div className="bg-red-50 border border-red-200 rounded-md p-3">
+            <p className="text-red-700 text-sm">{validationError}</p>
+          </div>
+        )}
         <input
         type="text"
         placeholder="Your Name"
@@ -448,11 +469,12 @@ export default function EPK() {
         className="border rounded px-3 py-2"
       />
       <textarea
-        placeholder="Your Message"
+        placeholder="Your Message (minimum 10 characters)"
         value={formData.message}
         onChange={e => setFormData({ ...formData, message: e.target.value })}
         required
         className="border rounded px-3 py-2"
+        minLength={10}
       />
         <button
           type="submit"
@@ -460,7 +482,7 @@ export default function EPK() {
         >
           Send
         </button>
-        <p className="text-muted-foreground text-sm mx-auto">Powered by EmailJS</p>
+        <p className="text-muted-foreground text-sm mx-auto">Secure contact form</p>
       </form>
 
           </div>
