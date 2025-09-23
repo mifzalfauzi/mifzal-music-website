@@ -1,8 +1,9 @@
 "use client"
 
-import { Mail, Music, Instagram, ExternalLink, Youtube, Copy, Check, Download } from "lucide-react"
+import { Mail, Music, Instagram, ExternalLink, Youtube, Copy, Check, Download, QrCode } from "lucide-react"
 import Image from "next/image"
 import { useState } from "react"
+import EPKPdf from "@/components/epk-pdf"
 
 const upcomingReleases = [
 
@@ -40,6 +41,26 @@ export default function EPK() {
   const [error, setError] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [validationError, setValidationError] = useState('');
+
+  const handlePDFDownload = () => {
+    // Hide main content and show PDF version
+    const mainContent = document.querySelector('.main-epk-content');
+    const pdfContent = document.querySelector('.epk-pdf-container');
+    
+    if (mainContent && pdfContent) {
+      (mainContent as HTMLElement).style.display = 'none';
+      (pdfContent as HTMLElement).style.display = 'block';
+      
+      // Trigger print
+      window.print();
+      
+      // Restore original layout after print dialog
+      setTimeout(() => {
+        (mainContent as HTMLElement).style.display = 'block';
+        (pdfContent as HTMLElement).style.display = 'none';
+      }, 100);
+    }
+  };
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
     setCopied(true);
@@ -125,7 +146,8 @@ export default function EPK() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
+      <div className="main-epk-content min-h-screen bg-background">
       {/* Hero/Header */}
       <section className="py-16 px-4 border-border">
         <div className="container mx-auto max-w-4xl">
@@ -159,7 +181,7 @@ export default function EPK() {
                   <ExternalLink className="w-4 h-4" />
                 </a>
                 <button
-                  onClick={() => window.print()}
+                  onClick={handlePDFDownload}
                   className="flex items-center space-x-1 text-muted-foreground hover:text-white/80 transition-colors cursor-pointer"
                   title="Download EPK as PDF"
                 >
@@ -568,6 +590,10 @@ export default function EPK() {
           </div>
         </div>
       )}
-    </div>
+      </div>
+      
+      {/* PDF Component */}
+      <EPKPdf />
+    </>
   )
 }
