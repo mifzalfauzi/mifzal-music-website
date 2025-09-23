@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mifzal",
+  title: "Mifzal - Official Website",
   description: "Mifzal",
 };
 

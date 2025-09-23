@@ -9,7 +9,7 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-muted-foreground text-sm md:text-base mb-4 md:mb-0">
-            &copy; {currentYear} Mifzal. All rights reserved.
+           Copyright &copy; {currentYear} MIFZAL
           </p>
 
           {/* <div className="flex space-x-6 md:hidden">
