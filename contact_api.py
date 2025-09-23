@@ -217,7 +217,9 @@ async def contact_main_site(request: Request):
             form_data = ContactForm(**data)
         except ValidationError as e:
             logger.error(f"Validation error: {str(e)}")
-            raise HTTPException(status_code=422, detail=str(e))
+            # Extract clean error message from first validation error
+            error_msg = e.errors()[0]['msg'] if e.errors() else "Validation failed"
+            raise HTTPException(status_code=422, detail=error_msg)
         
         logger.info(f"Validated form data from {form_data.email}")
         
@@ -271,7 +273,9 @@ async def contact_epk(request: Request):
             form_data = ContactForm(**data)
         except ValidationError as e:
             logger.error(f"Validation error: {str(e)}")
-            raise HTTPException(status_code=422, detail=str(e))
+            # Extract clean error message from first validation error
+            error_msg = e.errors()[0]['msg'] if e.errors() else "Validation failed"
+            raise HTTPException(status_code=422, detail=error_msg)
         
         logger.info(f"Validated EPK form data from {form_data.email}")
         
