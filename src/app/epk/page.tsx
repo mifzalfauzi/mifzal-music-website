@@ -1,6 +1,6 @@
 "use client"
 
-import { Mail, Music, Instagram, ExternalLink, Youtube, Copy, Check } from "lucide-react"
+import { Mail, Music, Instagram, ExternalLink, Youtube, Copy, Check, Download } from "lucide-react"
 import Image from "next/image"
 import { useState } from "react"
 
@@ -148,7 +148,7 @@ export default function EPK() {
               <p className="text-lg md:text-2xl text-muted-foreground font-light mb-4">
                 Cinematic Progressive Composer
               </p>
-              <div className="flex justify-center md:justify-start">
+              <div className="flex justify-center md:justify-start gap-4">
                 <a
                   href="https://www.mifzal.co"
                   target="_blank"
@@ -158,6 +158,14 @@ export default function EPK() {
                   <span>www.mifzal.co</span>
                   <ExternalLink className="w-4 h-4" />
                 </a>
+                <button
+                  onClick={() => window.print()}
+                  className="flex items-center space-x-1 text-muted-foreground hover:text-white/80 transition-colors cursor-pointer"
+                  title="Download EPK as PDF"
+                >
+                  <span>Download EPK</span>
+                  <Download className="w-4 h-4" />
+                </button>
               </div>
               <div className="flex justify-center md:justify-start gap-6 pt-6">
 
