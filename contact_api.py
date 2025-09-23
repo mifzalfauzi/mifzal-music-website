@@ -89,21 +89,21 @@ def create_email_template(name: str, email: str, message: str, is_epk: bool = Fa
                 <small>Composer/Artist</small></p>
                 
                 <div style="font-size: 14px; color: #666; margin-top: 20px;">
-        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-            <span style="font-size: 18px;">📧</span>
-            <a href="mailto:mifzalmusic@gmail.com" style="color: #007cba; text-decoration: none;">mifzalmusic@gmail.com</a>
-        </div>
-        
-        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-            <span style="font-size: 18px;">🌐</span>
-            <a href="https://www.mifzal.co" target="_blank" rel="noopener" style="color: #007cba; text-decoration: none;">www.mifzal.co</a>
-        </div>
-        
-        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-            <span style="font-size: 18px;">📷</span>
-            <a href="https://instagram.com/mifzalv" target="_blank" rel="noopener" style="color: #007cba; text-decoration: none;">@mifzalv</a>
-        </div>
-    </div>
+                    <div style="margin-bottom: 12px;">
+                        <div style="font-size: 18px; margin-bottom: 4px;">📧</div>
+                        <a href="mailto:mifzalmusic@gmail.com" style="color: #007cba; text-decoration: none;">mifzalmusic@gmail.com</a>
+                    </div>
+                    
+                    <div style="margin-bottom: 12px;">
+                        <div style="font-size: 18px; margin-bottom: 4px;">🌐</div>
+                        <a href="https://www.mifzal.co" target="_blank" rel="noopener" style="color: #007cba; text-decoration: none;">www.mifzal.co</a>
+                    </div>
+                    
+                    <div style="margin-bottom: 12px;">
+                        <div style="font-size: 18px; margin-bottom: 4px;">📷</div>
+                        <a href="https://instagram.com/mifzalv" target="_blank" rel="noopener" style="color: #007cba; text-decoration: none;">@mifzalv</a>
+                    </div>
+                </div>
                 
                 <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
                 <p style="font-size: 12px; color: #666;">
@@ -135,21 +135,21 @@ def create_email_template(name: str, email: str, message: str, is_epk: bool = Fa
                 <strong>The Mifzal Team</strong></p>
                 
                 <div style="font-size: 14px; color: #666; margin-top: 20px;">
-        <div style="margin-bottom: 12px;">
-            <div style="font-size: 18px; margin-bottom: 4px;">📧</div>
-            <a href="mailto:mifzalmusic@gmail.com" style="color: #007cba; text-decoration: none;">mifzalmusic@gmail.com</a>
-        </div>
-        
-        <div style="margin-bottom: 12px;">
-            <div style="font-size: 18px; margin-bottom: 4px;">🌐</div>
-            <a href="https://www.mifzal.co" target="_blank" rel="noopener" style="color: #007cba; text-decoration: none;">www.mifzal.co</a>
-        </div>
-        
-        <div style="margin-bottom: 12px;">
-            <div style="font-size: 18px; margin-bottom: 4px;">📷</div>
-            <a href="https://instagram.com/mifzalv" target="_blank" rel="noopener" style="color: #007cba; text-decoration: none;">@mifzalv</a>
-        </div>
-    </div>
+                    <div style="margin-bottom: 12px;">
+                        <div style="font-size: 18px; margin-bottom: 4px;">📧</div>
+                        <a href="mailto:mifzalmusic@gmail.com" style="color: #007cba; text-decoration: none;">mifzalmusic@gmail.com</a>
+                    </div>
+                    
+                    <div style="margin-bottom: 12px;">
+                        <div style="font-size: 18px; margin-bottom: 4px;">🌐</div>
+                        <a href="https://www.mifzal.co" target="_blank" rel="noopener" style="color: #007cba; text-decoration: none;">www.mifzal.co</a>
+                    </div>
+                    
+                    <div style="margin-bottom: 12px;">
+                        <div style="font-size: 18px; margin-bottom: 4px;">📷</div>
+                        <a href="https://instagram.com/mifzalv" target="_blank" rel="noopener" style="color: #007cba; text-decoration: none;">@mifzalv</a>
+                    </div>
+                </div>
                 
                 <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
                 
