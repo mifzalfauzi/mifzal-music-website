@@ -34,7 +34,7 @@ export default function EPKPdf() {
             padding: 0;
             font-family: 'Arial', sans-serif;
             line-height: 1.4;
-            color: #000;
+            color: #333;
             background: white;
           }
           .pdf-page {
@@ -55,17 +55,18 @@ export default function EPKPdf() {
             text-align: center;
             margin-bottom: 30px;
             padding-bottom: 20px;
-            border-bottom: 2px solid #000;
+            border-bottom: 1px solid #222;
           }
           .pdf-artist-name {
             font-size: 36px;
             font-weight: 300;
             letter-spacing: 4px;
             margin: 10px 0;
+            color: #222;
           }
           .pdf-subtitle {
             font-size: 16px;
-            color: #666;
+            color: #333;
             margin: 5px 0;
           }
           .pdf-section {
@@ -79,15 +80,17 @@ export default function EPKPdf() {
             letter-spacing: 2px;
             border-bottom: 1px solid #ccc;
             padding-bottom: 5px;
+            color: #444;
           }
           .pdf-content {
             font-size: 12px;
             line-height: 1.6;
+            color: #444;
           }
           .qr-placeholder {
             width: 100px;
             height: 100px;
-            border: 2px dashed #666;
+            border: 2px dashed #333;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -95,7 +98,7 @@ export default function EPKPdf() {
             flex-direction: column;
             font-size: 10px;
             text-align: center;
-            color: #666;
+            color: #333;
           }
           .track-list {
             display: grid;
@@ -183,7 +186,7 @@ export default function EPKPdf() {
           <div className="pdf-subtitle">Featured Music & Demo Tracks</div>
         </div>
 
-        <div className="pdf-section">
+        <div className="pdf-section mt-6">
           <h2 className="pdf-section-title">Featured Track</h2>
           <div className="pdf-content">
             <h3 style={{ fontSize: '16px', marginBottom: '15px' }}>Sapphire (Demo)</h3>
@@ -197,11 +200,13 @@ export default function EPKPdf() {
               <div>
                 <p><strong>"Sapphire"</strong> is a cinematic, progressive guitar-driven track that blends atmospheric textures with melodic phrasing. The piece explores the emotional depth of natural imagery through intricate guitar layers, subtle percussion, and evolving harmonies.</p>
                 <p>This track is the centerpiece of a larger conceptual suite, <strong>"Tales of Sapphire"</strong>, with supporting movements that extend the narrative into a full journey.</p>
-                <p style={{ fontStyle: 'italic', color: '#666', fontSize: '11px' }}>
+               
+              </div>
+             
+            </div>
+            <p style={{ fontStyle: 'italic', color: '#666', fontSize: '11px' }}>
                   * This track is in demo form and has not yet been professionally mixed or mastered.
                 </p>
-              </div>
-            </div>
           </div>
         </div>
 
@@ -231,7 +236,7 @@ export default function EPKPdf() {
                         <span style={{ fontSize: '12px' }}>
                           {String(trackIndex + 1).padStart(2, '0')}. {track}
                         </span>
-                        <span style={{ fontSize: '11px', color: '#666' }}>
+                        <span style={{ fontSize: '11px', color: '#444' }}>
                           {release.individualDuration[trackIndex]}
                         </span>
                       </div>
@@ -268,11 +273,11 @@ export default function EPKPdf() {
             <div className="pdf-content">
               <div style={{ marginBottom: '15px' }}>
                 <strong>Email:</strong><br />
-                mifzalmusic@gmail.com
+                <a href="mailto:mifzalmusic@gmail.com" style={{ color: '#222', textDecoration: 'underline' }}>mifzalmusic@gmail.com</a>
               </div>
               <div style={{ marginBottom: '15px' }}>
                 <strong>Website:</strong><br />
-                www.mifzal.co
+                <a href="https://www.mifzal.co" target="_blank" rel="noopener noreferrer" style={{ color: '#222', textDecoration: 'underline' }}>www.mifzal.co</a>
               </div>
             </div>
           </div>
@@ -281,16 +286,16 @@ export default function EPKPdf() {
             <h2 className="pdf-section-title">Social Media & Streaming</h2>
             <div className="pdf-content">
               <div style={{ marginBottom: '10px' }}>
-                <strong>Instagram:</strong> @mifzalv
+                <strong>Instagram:</strong> <a href="https://instagram.com/mifzalv" target="_blank" rel="noopener noreferrer" style={{ color: '#222', textDecoration: 'underline' }}>@mifzalv</a>
               </div>
               <div style={{ marginBottom: '10px' }}>
-                <strong>YouTube:</strong> @mifzals
+                <strong>YouTube:</strong> <a href="https://youtube.com/@mifzals" target="_blank" rel="noopener noreferrer" style={{ color: '#222', textDecoration: 'underline' }}>@mifzals</a>
               </div>
               <div style={{ marginBottom: '10px' }}>
-                <strong>Spotify:</strong> Mifzal
+                <strong>Spotify:</strong> <a href="https://open.spotify.com/artist/3HqfM3Xk0a0J6xZJvjQfkj" target="_blank" rel="noopener noreferrer" style={{ color: '#222', textDecoration: 'underline' }}>Mifzal</a>
               </div>
               <div style={{ marginBottom: '10px' }}>
-                <strong>Bandcamp:</strong> mifzal.bandcamp.com
+                <strong>Bandcamp:</strong> <a href="https://mifzal.bandcamp.com/" target="_blank" rel="noopener noreferrer" style={{ color: '#222', textDecoration: 'underline' }}>mifzal.bandcamp.com</a>
               </div>
             </div>
           </div>
@@ -304,7 +309,7 @@ export default function EPKPdf() {
           </div>
         </div>
 
-        <div style={{ marginTop: 'auto', textAlign: 'center', fontSize: '10px', color: '#666', paddingTop: '20px', borderTop: '1px solid #eee' }}>
+          <div style={{ marginTop: 'auto', textAlign: 'center', fontSize: '10px', color: '#333', paddingTop: '20px', borderTop: '1px solid #eee' }}>
           <p>For label consideration only. Please do not share this link.</p>
           <p>Generated: {new Date().toLocaleDateString()}</p>
         </div>

@@ -4,6 +4,7 @@ import { Mail, Music, Instagram, ExternalLink, Youtube, Copy, Check, Download, Q
 import Image from "next/image"
 import { useState } from "react"
 import EPKPdf from "@/components/epk-pdf"
+import PDFDownloadButton from "@/components/pdf-download-button"
 
 const upcomingReleases = [
 
@@ -42,25 +43,6 @@ export default function EPK() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [validationError, setValidationError] = useState('');
 
-  const handlePDFDownload = () => {
-    // Hide main content and show PDF version
-    const mainContent = document.querySelector('.main-epk-content');
-    const pdfContent = document.querySelector('.epk-pdf-container');
-    
-    if (mainContent && pdfContent) {
-      (mainContent as HTMLElement).style.display = 'none';
-      (pdfContent as HTMLElement).style.display = 'block';
-      
-      // Trigger print
-      window.print();
-      
-      // Restore original layout after print dialog
-      setTimeout(() => {
-        (mainContent as HTMLElement).style.display = 'block';
-        (pdfContent as HTMLElement).style.display = 'none';
-      }, 100);
-    }
-  };
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
     setCopied(true);
@@ -146,8 +128,7 @@ export default function EPK() {
   }
 
   return (
-    <>
-      <div className="main-epk-content min-h-screen bg-background">
+    <div className="min-h-screen bg-background">
       {/* Hero/Header */}
       <section className="py-16 px-4 border-border">
         <div className="container mx-auto max-w-4xl">
@@ -180,14 +161,7 @@ export default function EPK() {
                   <span>www.mifzal.co</span>
                   <ExternalLink className="w-4 h-4" />
                 </a>
-                <button
-                  onClick={handlePDFDownload}
-                  className="flex items-center space-x-1 text-muted-foreground hover:text-white/80 transition-colors cursor-pointer"
-                  title="Download EPK as PDF"
-                >
-                  <span>Download EPK</span>
-                  <Download className="w-4 h-4" />
-                </button>
+                <PDFDownloadButton />
               </div>
               <div className="flex justify-center md:justify-start gap-6 pt-6">
 
@@ -590,10 +564,6 @@ export default function EPK() {
           </div>
         </div>
       )}
-      </div>
-      
-      {/* PDF Component */}
-      <EPKPdf />
-    </>
+    </div>
   )
 }
