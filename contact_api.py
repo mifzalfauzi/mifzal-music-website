@@ -68,7 +68,7 @@ def create_email_template(name: str, email: str, message: str, is_epk: bool = Fa
     # Auto-reply template
     if is_epk:
         # EPK auto-reply (I/my phrasing)
-        auto_reply_subject = "Thank you for your message - Mifzal"
+        auto_reply_subject = "Thank you for your message"
         auto_reply_html = f"""
         <html>
         <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
@@ -86,7 +86,24 @@ def create_email_template(name: str, email: str, message: str, is_epk: bool = Fa
                 
                 <p>Best regards,<br>
                 <strong>Mifzal</strong><br>
-                <small>Cinematic Progressive Composer</small></p>
+                <small>Composer/Artist</small></p>
+                
+                <div style="font-size: 14px; color: #666; margin-top: 20px;">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+            <span style="font-size: 18px;">📧</span>
+            <a href="mailto:mifzalmusic@gmail.com" style="color: #007cba; text-decoration: none;">mifzalmusic@gmail.com</a>
+        </div>
+        
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+            <span style="font-size: 18px;">🌐</span>
+            <a href="https://www.mifzal.co" target="_blank" rel="noopener" style="color: #007cba; text-decoration: none;">www.mifzal.co</a>
+        </div>
+        
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+            <span style="font-size: 18px;">📷</span>
+            <a href="https://instagram.com/mifzalv" target="_blank" rel="noopener" style="color: #007cba; text-decoration: none;">@mifzalv</a>
+        </div>
+    </div>
                 
                 <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
                 <p style="font-size: 12px; color: #666;">
@@ -98,7 +115,7 @@ def create_email_template(name: str, email: str, message: str, is_epk: bool = Fa
         """
     else:
         # Main site auto-reply (we/our phrasing)
-        auto_reply_subject = "Thank you for your message - Mifzal"
+        auto_reply_subject = "Thank you for reaching out"
         auto_reply_html = f"""
         <html>
         <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
@@ -117,7 +134,27 @@ def create_email_template(name: str, email: str, message: str, is_epk: bool = Fa
                 <p>Best regards,<br>
                 <strong>The Mifzal Team</strong></p>
                 
+                <div style="font-size: 14px; color: #666; margin-top: 20px;">
+        <div style="margin-bottom: 12px;">
+            <div style="font-size: 18px; margin-bottom: 4px;">📧</div>
+            <a href="mailto:mifzalmusic@gmail.com" style="color: #007cba; text-decoration: none;">mifzalmusic@gmail.com</a>
+        </div>
+        
+        <div style="margin-bottom: 12px;">
+            <div style="font-size: 18px; margin-bottom: 4px;">🌐</div>
+            <a href="https://www.mifzal.co" target="_blank" rel="noopener" style="color: #007cba; text-decoration: none;">www.mifzal.co</a>
+        </div>
+        
+        <div style="margin-bottom: 12px;">
+            <div style="font-size: 18px; margin-bottom: 4px;">📷</div>
+            <a href="https://instagram.com/mifzalv" target="_blank" rel="noopener" style="color: #007cba; text-decoration: none;">@mifzalv</a>
+        </div>
+    </div>
+                
                 <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+                
+                
+        
                 <p style="font-size: 12px; color: #666;">
                     This is an automated response. Please do not reply directly to this email.
                 </p>
@@ -126,38 +163,11 @@ def create_email_template(name: str, email: str, message: str, is_epk: bool = Fa
         </html>
         """
     
-    # Inbox notification template
-    source = "EPK" if is_epk else "Main Website"
-    inbox_subject = f"New Contact Form Submission from {source} - {name}"
-    inbox_html = f"""
-    <html>
-    <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-        <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-            <h2 style="color: #2c2c2c; margin-bottom: 20px;">New Contact Form Submission</h2>
-            
-            <div style="background-color: #f0f8ff; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
-                <p><strong>Source:</strong> {source}</p>
-                <p><strong>Submitted:</strong> {datetime.now().strftime("%Y-%m-%d %H:%M:%S UTC")}</p>
-            </div>
-            
-            <div style="background-color: #f9f9f9; padding: 15px; border-radius: 5px;">
-                <h3 style="margin-top: 0; color: #007cba;">Contact Details:</h3>
-                <p><strong>Name:</strong> {name}</p>
-                <p><strong>Email:</strong> {email}</p>
-                
-                <h3 style="color: #007cba;">Message:</h3>
-                <p style="white-space: pre-wrap; background-color: #fff; padding: 10px; border-radius: 3px;">{message}</p>
-            </div>
-            
-            <p style="margin-top: 20px; font-size: 14px; color: #666;">
-                Reply directly to this email to respond to {name} at {email}
-            </p>
-        </div>
-    </body>
-    </html>
-    """
-    
-    return (auto_reply_subject, auto_reply_html, inbox_subject, inbox_html)
+    # Inbox notification now uses **the same HTML as auto-reply**
+    inbox_subject = auto_reply_subject
+    inbox_html = auto_reply_html
+
+    return auto_reply_subject, auto_reply_html, inbox_subject, inbox_html
 
 def send_email(to_email: str, subject: str, html_content: str, reply_to: Optional[str] = None):
     """Send email using SMTP"""
