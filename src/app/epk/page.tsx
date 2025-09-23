@@ -128,7 +128,22 @@ export default function EPK() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
+      {/* Film grain noise overlay */}
+      <div 
+        className="fixed inset-0 pointer-events-none opacity-40" 
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' result='noise' seed='1'/%3E%3CfeColorMatrix in='noise' type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E")`,
+          mixBlendMode: 'screen'
+        }}
+      />
+      <div 
+        className="fixed inset-0 pointer-events-none opacity-30" 
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='noise2'%3E%3CfeTurbulence type='turbulence' baseFrequency='1.5' numOctaves='1' result='noise' seed='5'/%3E%3CfeColorMatrix in='noise' type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise2)' opacity='0.6'/%3E%3C/svg%3E")`,
+          mixBlendMode: 'multiply'
+        }}
+      />
       {/* Hero/Header */}
       <section className="py-16 px-4 border-border">
         <div className="container mx-auto max-w-4xl">
