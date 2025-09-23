@@ -87,7 +87,8 @@ export default function Contact() {
       <div className="container mx-auto px-4 text-center min-h-screen flex flex-col justify-center">
         <div className="max-w-md mx-auto">
           <h2 className="text-2xl font-light mb-6 tracking-wider text-green-500">MESSAGE SENT!</h2>
-          <p className="text-muted-foreground mb-8">Thank you for reaching out.</p>
+          <p className="text-muted-foreground">Thank you for reaching out. </p>
+          <p className="text-muted-foreground mb-8">A copy will be sent to your email inbox by a few moments.</p>
           <button
             onClick={() => setSuccess(false)}
             className="cursor-pointer bg-white text-black px-6 py-2 rounded hover:bg-black hover:text-white transition-colors border border-black"
@@ -180,7 +181,7 @@ export default function Contact() {
         className="border rounded px-3 py-2"
       />
       <textarea
-        placeholder="Your Message (minimum 10 characters)"
+        placeholder="Your Message"
         value={formData.message}
         onChange={e => setFormData({ ...formData, message: e.target.value })}
         required

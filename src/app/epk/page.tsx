@@ -94,7 +94,8 @@ export default function EPK() {
       <div className="min-h-screen bg-background flex flex-col justify-center items-center">
         <div className="max-w-md mx-auto text-center">
           <h2 className="text-2xl font-light mb-6 tracking-wider text-green-500">MESSAGE SENT!</h2>
-          <p className="text-muted-foreground mb-8">Thank you for reaching out.</p>
+          <p className="text-muted-foreground">Thank you for reaching out. </p>
+          <p className="text-muted-foreground mb-8">A copy will be sent to your email inbox by a few moments.</p>
           <button
             onClick={() => setSuccess(false)}
             className="cursor-pointer bg-white text-black px-6 py-2 rounded hover:bg-black hover:text-white transition-colors border border-black"
