@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 import { Play, ChevronLeft, ChevronRight, Music as MusicIcon, Youtube } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import clsx from "clsx"
 
 const musicReleases = [
 
@@ -233,12 +234,12 @@ export default function Music() {
             className="w-full md:w-2/4 z-10 transition-all duration-800 ease-in-out transform scale-100"
           >
             <div className="bg-card rounded-xl shadow-lg overflow-hidden border border-border">
-              <div className="relative h-0
-             sm:pb-[80%]  
-             md:pb-[75%]"
-                style={{
-                  paddingBottom: musicReleases[activeIndex].type === "Single" ? "70%" : "75%",
-                }}
+              <div  className={clsx(
+      "relative",
+      musicReleases[activeIndex].type === "Single"
+             ? "aspect-[5/4] sm:aspect-[7/4] md:aspect-[5/4] lg:aspect-[5/4] xl:aspect-[5/3] 2xl:aspect-[5/4]"
+      : "aspect-[5/4] sm:aspect-[7/4] md:aspect-[5/4] lg:aspect-[5/4] xl:aspect-[5/3] 2xl:aspect-[5/4]"
+    )}
               >
                 {musicReleases[activeIndex].isReleased && musicReleases[activeIndex].spotifyEmbedId ? (
                   <iframe

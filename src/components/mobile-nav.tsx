@@ -27,7 +27,7 @@ export default function MobileNav() {
 
       {isOpen && (
         <div className="pl-4 absolute top-full left-0 w-full bg-transparent border-b border-border shadow-md">
-          <nav className="mb-6">
+          <nav className="mb-6 pt-16">
             <ul className="space-y-4">
               <li>
                 <Link
