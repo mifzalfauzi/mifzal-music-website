@@ -64,7 +64,7 @@ export default function PDFDownloadButton() {
 
               {/* Direct Download */}
               <a
-                href="/Mifzal_EPK.pdf"
+                href="/_EPK.pdf"
                 download="Mifzal_EPK.pdf"
                 className="w-full flex items-center justify-between p-4 bg-muted/10 border border-border rounded-lg hover:bg-muted/20 transition-all group cursor-pointer"
                 onClick={closeModal}

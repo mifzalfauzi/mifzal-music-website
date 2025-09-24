@@ -157,10 +157,10 @@ export default function Music() {
     const isLeftSwipe = distance > 50
     const isRightSwipe = distance < -50
 
-    if (isLeftSwipe && activeIndex < musicReleases.length - 1) {
+    if (isLeftSwipe) {
       showNextRelease()
     }
-    if (isRightSwipe && activeIndex > 0) {
+    if (isRightSwipe) {
       showPrevRelease()
     }
   }
