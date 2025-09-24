@@ -40,8 +40,8 @@ export default function UpcomingMusic() {
       <div className="max-w-3xl mx-auto space-y-8">
         {upcomingReleases.map((release, index) => (
           <div key={index} className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+              <div className="mb-2 md:mb-0">
                 <h3 className="text-lg md:text-xl font-light tracking-wide">{release.title}</h3>
                 <div className="flex items-center gap-3 text-sm md:text-base text-muted-foreground mt-1">
                   <span>{release.type}</span>
@@ -53,15 +53,22 @@ export default function UpcomingMusic() {
 
               </div>
               <span
-                className={`px-3 py-1 rounded-full text-xs font-medium ${statusColors[release.status as keyof typeof statusColors] || ""}`}
+                className={`hidden md:inline-block px-3 py-1 rounded-full text-xs font-medium ${statusColors[release.status as keyof typeof statusColors] || ""}`}
               >
                 {release.status}
               </span>
             </div>
 
-            <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
-              {release.description}
-            </p>
+            <div>
+              <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
+                {release.description}
+              </p>
+              <span
+                className={`md:hidden inline-block mt-2 px-3 py-1 rounded-full text-xs font-medium ${statusColors[release.status as keyof typeof statusColors] || ""}`}
+              >
+                {release.status}
+              </span>
+            </div>
 
             {release.tracks && (
               <div className="space-y-2">
