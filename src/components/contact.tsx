@@ -46,7 +46,7 @@ export default function Contact() {
     setIsSubmitting(true);
     setValidationError('');
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/contact/main`, {
+      const response = await fetch('/api/contact-main', {
 
         method: 'POST',
         headers: {
