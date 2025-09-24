@@ -242,17 +242,32 @@ export default function Music() {
     )}
               >
                 {musicReleases[activeIndex].isReleased && musicReleases[activeIndex].spotifyEmbedId ? (
-                  <iframe
-                    style={{ borderRadius: "13px" }}
-                    src={`https://open.spotify.com/embed/${musicReleases[activeIndex].type !== "Single" ? "album" : "track"
-                      }/${musicReleases[activeIndex].spotifyEmbedId}?utm_source=generator&theme=0`}
-                    width="100%"
-                    height={musicReleases[activeIndex].type === "Single" ? 352 : 370}
-                    frameBorder="0"
-                    allowFullScreen
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                    loading="lazy"
-                  />
+                  <>
+                    <iframe
+                      style={{ borderRadius: "13px" }}
+                      src={`https://open.spotify.com/embed/${musicReleases[activeIndex].type !== "Single" ? "album" : "track"
+                        }/${musicReleases[activeIndex].spotifyEmbedId}?utm_source=generator&theme=0`}
+                      width="100%"
+                      height={musicReleases[activeIndex].type === "Single" ? 352 : 370}
+                      frameBorder="0"
+                      allowFullScreen
+                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                      loading="lazy"
+                    />
+                    {/* Touch overlay for swipe detection on mobile - positioned at edges */}
+                    <div 
+                      className="absolute left-0 top-0 bottom-0 w-16 md:hidden bg-transparent z-10"
+                      onTouchStart={handleTouchStart}
+                      onTouchMove={handleTouchMove}
+                      onTouchEnd={handleTouchEnd}
+                    />
+                    <div 
+                      className="absolute right-0 top-0 bottom-0 w-16 md:hidden bg-transparent z-10"
+                      onTouchStart={handleTouchStart}
+                      onTouchMove={handleTouchMove}
+                      onTouchEnd={handleTouchEnd}
+                    />
+                  </>
                 ) : (
                   <Image
                     src={musicReleases[activeIndex].cover || "/placeholder.svg"}
