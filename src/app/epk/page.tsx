@@ -173,7 +173,7 @@ export default function EPK() {
                   rel="noopener noreferrer"
                   className="flex items-center space-x-1 text-muted-foreground hover:text-white/80 transition-colors"
                 >
-                  <span>www.mifzal.co</span>
+                  <span>mifzal.co</span>
                   <ExternalLink className="w-4 h-4" />
                 </a>
                 <PDFDownloadButton />
