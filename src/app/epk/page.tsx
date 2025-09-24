@@ -59,7 +59,7 @@ export default function EPK() {
     setIsSubmitting(true);
     setValidationError('');
     try {
-      const response = await fetch('http://localhost:8000/contact/epk', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/contact/epk`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

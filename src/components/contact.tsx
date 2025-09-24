@@ -46,7 +46,8 @@ export default function Contact() {
     setIsSubmitting(true);
     setValidationError('');
     try {
-      const response = await fetch('http://localhost:8000/contact/main', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/contact/main`, {
+
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
