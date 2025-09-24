@@ -242,32 +242,17 @@ export default function Music() {
     )}
               >
                 {musicReleases[activeIndex].isReleased && musicReleases[activeIndex].spotifyEmbedId ? (
-                  <>
-                    <iframe
-                      style={{ borderRadius: "13px" }}
-                      src={`https://open.spotify.com/embed/${musicReleases[activeIndex].type !== "Single" ? "album" : "track"
-                        }/${musicReleases[activeIndex].spotifyEmbedId}?utm_source=generator&theme=0`}
-                      width="100%"
-                      height={musicReleases[activeIndex].type === "Single" ? 352 : 370}
-                      frameBorder="0"
-                      allowFullScreen
-                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                      loading="lazy"
-                    />
-                    {/* Touch overlay for swipe detection on mobile - positioned at edges */}
-                    <div 
-                      className="absolute left-0 top-0 bottom-0 w-16 md:hidden bg-transparent z-10"
-                      onTouchStart={handleTouchStart}
-                      onTouchMove={handleTouchMove}
-                      onTouchEnd={handleTouchEnd}
-                    />
-                    <div 
-                      className="absolute right-0 top-0 bottom-0 w-16 md:hidden bg-transparent z-10"
-                      onTouchStart={handleTouchStart}
-                      onTouchMove={handleTouchMove}
-                      onTouchEnd={handleTouchEnd}
-                    />
-                  </>
+                  <iframe
+                    style={{ borderRadius: "13px" }}
+                    src={`https://open.spotify.com/embed/${musicReleases[activeIndex].type !== "Single" ? "album" : "track"
+                      }/${musicReleases[activeIndex].spotifyEmbedId}?utm_source=generator&theme=0`}
+                    width="100%"
+                    height={musicReleases[activeIndex].type === "Single" ? 352 : 370}
+                    frameBorder="0"
+                    allowFullScreen
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"
+                  />
                 ) : (
                   <Image
                     src={musicReleases[activeIndex].cover || "/placeholder.svg"}
@@ -357,22 +342,45 @@ export default function Music() {
         </div>
       </div>
 
-      {/* Indicator dots */}
-      <div className="flex justify-center space-x-2 mt-6">
-        {musicReleases.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => {
-              if (isTransitioning) return;
-              setIsTransitioning(true);
-              setActiveIndex(index);
-              setTimeout(() => setIsTransitioning(false), 800);
-            }}
-            className={`w-2 h-2 rounded-full cursor-pointer transition-all duration-800 ease-in-out hover:scale-125 ${index === activeIndex ? "bg-foreground scale-110" : "bg-muted-foreground/30"
-              }`}
-            aria-label={`Go to release ${index + 1}`}
-          />
-        ))}
+      {/* Indicator dots with chevron navigation for mobile */}
+      <div className="flex justify-center items-center space-x-4 mt-6">
+        {/* Left chevron - only show on mobile */}
+        <button
+          onClick={showPrevRelease}
+          className="md:hidden p-2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+          aria-label="Previous release"
+          disabled={isTransitioning}
+        >
+          <ChevronLeft size={20} />
+        </button>
+
+        {/* Dots */}
+        <div className="flex space-x-2">
+          {musicReleases.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => {
+                if (isTransitioning) return;
+                setIsTransitioning(true);
+                setActiveIndex(index);
+                setTimeout(() => setIsTransitioning(false), 800);
+              }}
+              className={`w-2 h-2 rounded-full cursor-pointer transition-all duration-800 ease-in-out hover:scale-125 ${index === activeIndex ? "bg-foreground scale-110" : "bg-muted-foreground/30"
+                }`}
+              aria-label={`Go to release ${index + 1}`}
+            />
+          ))}
+        </div>
+
+        {/* Right chevron - only show on mobile */}
+        <button
+          onClick={showNextRelease}
+          className="md:hidden p-2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+          aria-label="Next release"
+          disabled={isTransitioning}
+        >
+          <ChevronRight size={20} />
+        </button>
       </div>
     </div>
   )
