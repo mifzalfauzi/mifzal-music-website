@@ -4,7 +4,7 @@ from pydantic import BaseModel, EmailStr, validator, ValidationError
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-import os
+import os, uvicorn
 import re
 from typing import Optional
 import logging
@@ -229,5 +229,5 @@ async def root():
 
 
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    port = int(os.environ.get("PORT", 8000))  # use Render's PORT or fallback to 8000
+    uvicorn.run(app, host="0.0.0.0", port=port)

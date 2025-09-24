@@ -23,7 +23,7 @@ const upcomingReleases = [
     duration: "~9:00",
     tracks: ["Sapphire", "Pieces of The Vague Ceremony", "Vita (Reimagined)"]
   },
- 
+
 ]
 
 const statusColors = {
@@ -36,7 +36,7 @@ export default function UpcomingMusic() {
   return (
     <div className="container mx-auto px-4">
       <h2 className="text-lg md:text-3xl font-light mb-12 text-center tracking-wider">UPCOMING RELEASES</h2>
-      
+
       <div className="max-w-3xl mx-auto space-y-8">
         {upcomingReleases.map((release, index) => (
           <div key={index} className="space-y-4">
@@ -48,20 +48,21 @@ export default function UpcomingMusic() {
                   <span>•</span>
                   <span>{release.genre}</span>
                   <span>•</span>
-                  <span>{release.expectedDate}</span>
+                  <span className="hidden md:inline">{release.expectedDate}</span>
                 </div>
+
               </div>
-              <span 
+              <span
                 className={`px-3 py-1 rounded-full text-xs font-medium ${statusColors[release.status as keyof typeof statusColors] || ""}`}
               >
                 {release.status}
               </span>
             </div>
-            
+
             <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
               {release.description}
             </p>
-            
+
             {release.tracks && (
               <div className="space-y-2">
                 {release.tracks.map((track, trackIndex) => (
@@ -73,14 +74,14 @@ export default function UpcomingMusic() {
                 ))}
               </div>
             )}
-            
+
             {index < upcomingReleases.length - 1 && (
               <div className="pt-6 border-b border-border"></div>
             )}
           </div>
         ))}
       </div>
-      
+
       <div className="text-center mt-12">
         <p className="text-muted-foreground text-sm md:text-base">
           Release dates are subject to change.
