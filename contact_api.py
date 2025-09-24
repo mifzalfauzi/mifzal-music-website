@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, EmailStr, field_validator, ValidationError
+from pydantic import BaseModel, EmailStr, validator, ValidationError
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -41,7 +41,7 @@ class ContactForm(BaseModel):
     email: EmailStr
     message: str
 
-    @field_validator('name')
+    @validator('name')
     @classmethod
     def validate_name(cls, v):
         if not v or len(v.strip()) < 2:
@@ -52,7 +52,7 @@ class ContactForm(BaseModel):
             raise ValueError('Name contains invalid characters')
         return v.strip()
 
-    @field_validator('message')
+    @validator('message')
     @classmethod
     def validate_message(cls, v):
         if not v or len(v.strip()) < 10:
