@@ -1,6 +1,5 @@
 "use client"
 
-import { motion } from "framer-motion"
 import VerticalNav from "@/components/vertical-nav"
 import SocialIcons from "@/components/social-icons"
 import Hero from "@/components/hero"
@@ -14,21 +13,6 @@ import About from "@/components/about"
 import Contact from "@/components/contact"
 import UpcomingMusic from "@/components/upcoming-music"
 
-// Animation variants for sections
-const sectionVariants = {
-  hidden: { 
-    opacity: 0,
-    y: 50
-  },
-  visible: { 
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut"
-    }
-  }
-}
 
 export default function Home() {
   return (
@@ -68,7 +52,7 @@ export default function Home() {
           variants={sectionVariants}
         >
           <BandMembers />
-        </motion.section> */}
+        </section> */}
 
         {/* <motion.section 
           id="shows" 
@@ -79,40 +63,28 @@ export default function Home() {
           variants={sectionVariants}
         >
           <Shows />
-        </motion.section> */}
+        </section> */}
 
-<motion.section 
+<section 
           id="about" 
           className="py-12 md:py-20"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, margin: "-100px" }}
-          variants={sectionVariants}
         >
           <About />
-        </motion.section>
+        </section>
 
-        <motion.section 
+        <section 
           id="music" 
           className="py-12 md:py-20"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, margin: "-100px" }}
-          variants={sectionVariants}
         >
           <Music />
-        </motion.section>
+        </section>
 
-        <motion.section 
+        <section 
           id="upcoming-music" 
           className="py-12 md:py-20"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, margin: "-100px" }}
-          variants={sectionVariants}
         >
           <UpcomingMusic />
-        </motion.section>
+        </section>
 
         {/* <motion.section 
           id="newsletter" 
@@ -123,17 +95,13 @@ export default function Home() {
           variants={sectionVariants}
         >
           <Newsletter />
-        </motion.section> */}
-        <motion.section 
+        </section> */}
+        <section 
           id="contact" 
           className="py-12 md:py-20"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, margin: "-100px" }}
-          variants={sectionVariants}
         >
           <Contact />
-        </motion.section>
+        </section>
       </main>
 
       <Footer />
