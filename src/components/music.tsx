@@ -233,7 +233,9 @@ export default function Music() {
             className="w-full md:w-2/4 z-10 transition-all duration-800 ease-in-out transform scale-100"
           >
             <div className="bg-card rounded-xl shadow-lg overflow-hidden border border-border">
-              <div className="relative h-0"
+              <div className="relative h-0
+             sm:pb-[80%]  
+             md:pb-[75%]"
                 style={{
                   paddingBottom: musicReleases[activeIndex].type === "Single" ? "70%" : "75%",
                 }}
