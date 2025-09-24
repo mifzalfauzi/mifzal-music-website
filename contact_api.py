@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException, Request, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, EmailStr, validator, ValidationError
 import smtplib
@@ -11,12 +11,50 @@ import logging
 from datetime import datetime
 from dotenv import load_dotenv
 import json
+import asyncio
+import aiohttp
+from contextlib import asynccontextmanager
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-app = FastAPI(title="Mifzal Contact API", version="1.0.0")
+# Global variable to store the keep-alive task
+keep_alive_task = None
+
+async def keep_alive():
+    """Background task to ping the server every 5 minutes"""
+    base_url = os.getenv("RENDER_EXTERNAL_URL")
+    
+    while True:
+        try:
+            await asyncio.sleep(300)  # 5 minutes = 300 seconds
+            async with aiohttp.ClientSession() as session:
+                async with session.get(f"{base_url}/ping") as response:
+                    if response.status == 200:
+                        logger.info("Keep-alive ping successful")
+                    else:
+                        logger.warning(f"Keep-alive ping failed with status: {response.status}")
+        except Exception as e:
+            logger.error(f"Keep-alive ping error: {str(e)}")
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup
+    global keep_alive_task
+    keep_alive_task = asyncio.create_task(keep_alive())
+    logger.info("Keep-alive task started")
+    yield
+    # Shutdown
+    if keep_alive_task:
+        keep_alive_task.cancel()
+        logger.info("Keep-alive task cancelled")
+
+app = FastAPI(
+    title="Mifzal Contact API", 
+    version="1.0.0",
+    lifespan=lifespan
+)
 
 # CORS middleware
 app.add_middleware(
@@ -207,7 +245,6 @@ async def handle_contact(request: Request, is_epk: bool = False):
     }
 
 
-
 @app.post("/contact/main")
 async def contact_main_site(request: Request):
     return await handle_contact(request, is_epk=False)
@@ -221,6 +258,16 @@ async def contact_epk(request: Request):
 @app.get("/health")
 async def health_check():
     return {"status": "healthy", "timestamp": datetime.now().isoformat()}
+
+
+@app.get("/ping")
+async def ping():
+    """Lightweight endpoint for keep-alive pings"""
+    return {
+        "status": "alive", 
+        "timestamp": datetime.now().isoformat(),
+        "message": "Server is running"
+    }
 
 
 @app.get("/")
