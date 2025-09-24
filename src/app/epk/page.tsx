@@ -313,7 +313,7 @@ export default function EPK() {
                 This track is the centerpiece of a larger conceptual suite, <strong>"Tales of Sapphire"</strong>, with supporting movements that extend the narrative into a full journey.
               </p>
 
-              <p className="text-sm md:text-base text-muted-foreground mt-4 italic">
+              <p className="text-sm  text-muted-foreground mt-4 italic">
                 <span className="text-red-500 font-bold">* </span>
                 This track is in demo form and has not yet been professionally mixed or mastered.
               </p>
