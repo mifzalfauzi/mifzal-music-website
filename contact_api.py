@@ -114,8 +114,8 @@ def create_email_template(name: str, email: str, message: str, is_epk: bool = Fa
                 <strong>Mifzal</strong><br>
                 <small>Composer/Artist</small></p>
                 <div style="font-size: 14px; color: #666; margin-top: 20px;">
-                    <div style="margin-bottom: 12px;">📧 <a href="mailto:mifzalmusic@gmail.com" style="color: #007cba;">mifzalmusic@gmail.com</a></div>
-                    <div style="margin-bottom: 12px;">🌐 <a href="https://www.mifzal.co" target="_blank" style="color: #007cba;">www.mifzal.co</a></div>
+                    <div style="margin-bottom: 12px;">📧 <a href="mailto:contact@mifzal.co" style="color: #007cba;">Artist Email</a></div>
+                    <div style="margin-bottom: 12px;">🌐 <a href="https://www.mifzal.co" target="_blank" style="color: #007cba;">mifzal.co</a></div>
                     <div style="margin-bottom: 12px;">📷 <a href="https://instagram.com/mifzalv" target="_blank" style="color: #007cba;">@mifzalv</a></div>
                 </div>
                 <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
@@ -143,8 +143,8 @@ def create_email_template(name: str, email: str, message: str, is_epk: bool = Fa
                 <p>Best regards,<br>
                 <strong>The Mifzal Team</strong></p>
                 <div style="font-size: 14px; color: #666; margin-top: 20px;">
-                    <div style="margin-bottom: 12px;">📧 <a href="mailto:mifzalmusic@gmail.com" style="color: #007cba;">mifzalmusic@gmail.com</a></div>
-                    <div style="margin-bottom: 12px;">🌐 <a href="https://www.mifzal.co" target="_blank" style="color: #007cba;">www.mifzal.co</a></div>
+                    <div style="margin-bottom: 12px;">📧 <a href="mailto:contact@mifzal.co" style="color: #007cba;">Artist Email</a></div>
+                    <div style="margin-bottom: 12px;">🌐 <a href="https://www.mifzal.co" target="_blank" style="color: #007cba;">mifzal.co</a></div>
                     <div style="margin-bottom: 12px;">📷 <a href="https://instagram.com/mifzalv" target="_blank" style="color: #007cba;">@mifzalv</a></div>
                 </div>
                 <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
