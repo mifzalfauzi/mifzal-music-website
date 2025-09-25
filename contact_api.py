@@ -125,7 +125,7 @@ def create_email_template(name: str, email: str, message: str, is_epk: bool = Fa
         </html>
         """
     else:
-        subject = "Thank you for reaching out".format(name=name)
+        subject = "Thank you for reaching out - {name}".format(name=name)
         html = f"""
         <html>
         <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
