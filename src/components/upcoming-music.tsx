@@ -60,9 +60,9 @@ export default function UpcomingMusic() {
             </div>
 
             <div>
-              <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
+              {/* <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
                 {release.description}
-              </p>
+              </p> */}
               <span
                 className={`md:hidden inline-block mt-2 px-3 py-1 rounded-full text-xs font-medium ${statusColors[release.status as keyof typeof statusColors] || ""}`}
               >
