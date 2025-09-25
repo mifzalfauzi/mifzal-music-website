@@ -101,7 +101,7 @@ def create_email_template(name: str, email: str, message: str, is_epk: bool = Fa
         <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
             <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
             <div style="text-align: center; margin-bottom: 20px;">
-                <img src="https://www.mifzal.co/apple-icon-144x144.png" alt="Mifzal Logo" style="max-width: 150px; height: auto;">
+                <img src="https://www.mifzal.co/mifzal_co_gmail_img-144x144.png" alt="Mifzal Logo" style="max-width: 150px; height: auto;">
             </div>
                 <h2 style="color: #2c2c2c; margin-bottom: 20px;">Thank you for reaching out, {name}!</h2>
                 <p>I've received your message and will get back to you as soon as possible.</p>
@@ -131,7 +131,7 @@ def create_email_template(name: str, email: str, message: str, is_epk: bool = Fa
         <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
             <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
             <div style="text-align: center; margin-bottom: 20px;">
-                <img src="https://www.mifzal.co/apple-icon-144x144.png" alt="Mifzal Logo" style="max-width: 150px; height: auto;">
+                <img src="https://www.mifzal.co/mifzal_co_gmail_img-144x144.png" alt="Mifzal Logo" style="max-width: 150px; height: auto;">
             </div>
                 <h2 style="color: #2c2c2c; margin-bottom: 20px;">Thank you for reaching out, {name}!</h2>
                 <p>We've received your message and will get back to you as soon as possible.</p>
