@@ -181,7 +181,7 @@ def send_email(to_email: str, subject: str, html_content: str, reply_to: Optiona
     """Send email via SendGrid"""
     try:
         message = Mail(
-            from_email=Email(INBOX_EMAIL),
+            from_email=Email(INBOX_EMAIL, name="Mifzal"),
             to_emails=To(to_email),
             subject=subject,
             html_content=Content("text/html", html_content)
