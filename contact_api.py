@@ -167,12 +167,21 @@ def create_simple_notification(name: str, email: str, is_epk: bool = False) -> t
             <p><strong>Source:</strong> {source}</p>
             <p><strong>Name:</strong> {name}</p>
             <p><strong>Email:</strong> <a href="mailto:{email}" style="color: #007cba;">{email}</a></p>
+            
+            <p style="margin-top:20px;">
+                📥 <a href="https://privateemail.com/appsuite/#!!&app=io.ox/mail&folder=default0/INBOX&storeLocale=true" 
+                style="color:#007cba; font-weight:bold;" target="_blank">
+                Open Inbox
+                </a>
+            </p>
+
             <p style="font-size: 12px; color: #666; margin-top: 20px;">This is an automated notification for internal purposes. Do not reply.</p>
         </div>
     </body>
     </html>
     """
     return subject, html
+
 
 # ----------------------------
 # SendGrid Email Sender
@@ -229,14 +238,17 @@ async def handle_contact(request: Request, is_epk: bool = False):
     except Exception:
         raise HTTPException(status_code=500, detail="Failed to send copy to inbox")
 
-    # Internal notification
+    
+    # Internal notification (send to both main inbox + Gmail)
     notif_subject, notif_html = create_simple_notification(
         form_data.name, form_data.email, is_epk
     )
-    try:
-        send_email(INBOX_EMAIL, notif_subject, notif_html)
-    except Exception:
-        raise HTTPException(status_code=500, detail="Failed to send inbox notification")
+    for recipient in [INBOX_EMAIL, "mifzalmusic@gmail.com"]:
+        try:
+            send_email(recipient, notif_subject, notif_html)
+        except Exception:
+            raise HTTPException(status_code=500, detail=f"Failed to send inbox notification to {recipient}")
+
 
     return {
         "success": True,
