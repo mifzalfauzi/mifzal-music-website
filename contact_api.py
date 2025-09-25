@@ -95,11 +95,14 @@ class ContactForm(BaseModel):
 def create_email_template(name: str, email: str, message: str, is_epk: bool = False) -> tuple[str, str]:
     """Full auto-reply template for user"""
     if is_epk:
-        subject = "Thank you for your message"
+        subject = "Thank you for your message - {name}".format(name=name)
         html = f"""
         <html>
         <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
             <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="https://www.mifzal.co/apple-icon-152x152.png" alt="Mifzal Logo" style="max-width: 150px; height: auto;">
+            </div>
                 <h2 style="color: #2c2c2c; margin-bottom: 20px;">Thank you for reaching out, {name}!</h2>
                 <p>I've received your message and will get back to you as soon as possible.</p>
                 <div style="background-color: #f9f9f9; padding: 15px; border-left: 4px solid #007cba; margin: 20px 0;">
@@ -122,11 +125,14 @@ def create_email_template(name: str, email: str, message: str, is_epk: bool = Fa
         </html>
         """
     else:
-        subject = "Thank you for reaching out"
+        subject = "Thank you for reaching out".format(name=name)
         html = f"""
         <html>
         <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
             <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="https://www.mifzal.co/apple-icon-152x152.png" alt="Mifzal Logo" style="max-width: 150px; height: auto;">
+            </div>
                 <h2 style="color: #2c2c2c; margin-bottom: 20px;">Thank you for reaching out, {name}!</h2>
                 <p>We've received your message and will get back to you as soon as possible.</p>
                 <div style="background-color: #f9f9f9; padding: 15px; border-left: 4px solid #007cba; margin: 20px 0;">
