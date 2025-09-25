@@ -1,23 +1,22 @@
 from fastapi import FastAPI, HTTPException, Request, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, EmailStr, validator, ValidationError
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-import os, uvicorn
-import re
 from typing import Optional
-import logging
+import os, uvicorn, re, logging, json, asyncio, aiohttp
 from datetime import datetime
 from dotenv import load_dotenv
-import json
-import asyncio
-import aiohttp
 from contextlib import asynccontextmanager
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail, Email, To, Content
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+# Load environment variables
+load_dotenv()
+SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
+INBOX_EMAIL = os.getenv("INBOX_EMAIL")
 
 # Global variable to store the keep-alive task
 keep_alive_task = None
@@ -25,10 +24,9 @@ keep_alive_task = None
 async def keep_alive():
     """Background task to ping the server every 5 minutes"""
     base_url = os.getenv("RENDER_EXTERNAL_URL")
-    
     while True:
         try:
-            await asyncio.sleep(300)  # 5 minutes = 300 seconds
+            await asyncio.sleep(300)  # 5 minutes
             async with aiohttp.ClientSession() as session:
                 async with session.get(f"{base_url}/ping") as response:
                     if response.status == 200:
@@ -40,12 +38,10 @@ async def keep_alive():
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup
     global keep_alive_task
     keep_alive_task = asyncio.create_task(keep_alive())
     logger.info("Keep-alive task started")
     yield
-    # Shutdown
     if keep_alive_task:
         keep_alive_task.cancel()
         logger.info("Keep-alive task cancelled")
@@ -65,15 +61,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Load environment variables
-load_dotenv()
-SMTP_SERVER = os.getenv("SMTP_SERVER")
-SMTP_PORT = int(os.getenv("SMTP_PORT"))
-SMTP_USERNAME = os.getenv("SMTP_USERNAME")
-SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")
-INBOX_EMAIL = os.getenv("INBOX_EMAIL")
-
-
+# ----------------------------
+# Models & Validators
+# ----------------------------
 class ContactForm(BaseModel):
     name: str
     email: EmailStr
@@ -99,7 +89,9 @@ class ContactForm(BaseModel):
             raise ValueError('Message must be less than 5000 characters')
         return v.strip()
 
-
+# ----------------------------
+# Email Templates
+# ----------------------------
 def create_email_template(name: str, email: str, message: str, is_epk: bool = False) -> tuple[str, str]:
     """Full auto-reply template for user"""
     if is_epk:
@@ -157,7 +149,6 @@ def create_email_template(name: str, email: str, message: str, is_epk: bool = Fa
         """
     return subject, html
 
-
 def create_simple_notification(name: str, email: str, is_epk: bool = False) -> tuple[str, str]:
     """Minimal internal notification for inbox"""
     source = "EPK" if is_epk else "Main Website"
@@ -177,27 +168,31 @@ def create_simple_notification(name: str, email: str, is_epk: bool = False) -> t
     """
     return subject, html
 
-
+# ----------------------------
+# SendGrid Email Sender
+# ----------------------------
 def send_email(to_email: str, subject: str, html_content: str, reply_to: Optional[str] = None):
-    """Send email via SMTP"""
+    """Send email via SendGrid"""
     try:
-        msg = MIMEMultipart('alternative')
-        msg['From'] = SMTP_USERNAME
-        msg['To'] = to_email
-        msg['Subject'] = subject
+        message = Mail(
+            from_email=Email(INBOX_EMAIL),
+            to_emails=To(to_email),
+            subject=subject,
+            html_content=Content("text/html", html_content)
+        )
         if reply_to:
-            msg['Reply-To'] = reply_to
-        msg.attach(MIMEText(html_content, 'html'))
-        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
-            server.starttls()
-            server.login(SMTP_USERNAME, SMTP_PASSWORD)
-            server.send_message(msg)
-        logger.info(f"Email sent to {to_email}")
+            message.reply_to = Email(reply_to)
+
+        sg = SendGridAPIClient(SENDGRID_API_KEY)
+        response = sg.send(message)
+        logger.info(f"Email sent to {to_email}, status code: {response.status_code}")
     except Exception as e:
         logger.error(f"Failed to send email to {to_email}: {str(e)}")
         raise e
 
-
+# ----------------------------
+# Contact Handler
+# ----------------------------
 async def handle_contact(request: Request, is_epk: bool = False):
     body = await request.body()
     logger.info(f"Received request body: {body.decode()}")
@@ -213,24 +208,22 @@ async def handle_contact(request: Request, is_epk: bool = False):
         error_msg = e.errors()[0]['msg'] if e.errors() else "Validation failed"
         raise HTTPException(status_code=422, detail=error_msg)
 
-    # Create auto-reply email to user
+    # Auto-reply email
     auto_subject, auto_html = create_email_template(
         form_data.name, form_data.email, form_data.message, is_epk
     )
-    
-    # Send auto-reply to user
     try:
         send_email(form_data.email, auto_subject, auto_html)
     except Exception:
         raise HTTPException(status_code=500, detail="Failed to send confirmation email to user")
 
-    # Send a copy of the auto-reply to your inbox with Reply-To set to user
+    # Copy to inbox with reply-to
     try:
         send_email(INBOX_EMAIL, f"📩 Copy of : {auto_subject}", auto_html, reply_to=form_data.email)
     except Exception:
         raise HTTPException(status_code=500, detail="Failed to send copy to inbox")
 
-    # Send simple internal notification as well
+    # Internal notification
     notif_subject, notif_html = create_simple_notification(
         form_data.name, form_data.email, is_epk
     )
@@ -244,37 +237,36 @@ async def handle_contact(request: Request, is_epk: bool = False):
         "message": "Message sent successfully. You should receive a confirmation email shortly."
     }
 
-
+# ----------------------------
+# Routes
+# ----------------------------
 @app.post("/contact/main")
 async def contact_main_site(request: Request):
     return await handle_contact(request, is_epk=False)
-
 
 @app.post("/contact/epk")
 async def contact_epk(request: Request):
     return await handle_contact(request, is_epk=True)
 
-
 @app.get("/health")
 async def health_check():
     return {"status": "healthy", "timestamp": datetime.now().isoformat()}
 
-
 @app.get("/ping")
 async def ping():
-    """Lightweight endpoint for keep-alive pings"""
     return {
         "status": "alive", 
         "timestamp": datetime.now().isoformat(),
         "message": "Server is running"
     }
 
-
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
 
-
+# ----------------------------
+# Run
+# ----------------------------
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8000))  # use Render's PORT or fallback to 8000
+    port = int(os.environ.get("PORT", 8000))
     uvicorn.run(app, host="0.0.0.0", port=port)
