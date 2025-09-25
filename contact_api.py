@@ -182,16 +182,15 @@ def create_simple_notification(name: str, email: str, is_epk: bool = False) -> t
     """
     return subject, html
 
-
 # ----------------------------
 # SendGrid Email Sender
 # ----------------------------
-def send_email(to_email: str, subject: str, html_content: str, reply_to: Optional[str] = None):
+def send_email(to_emails, subject: str, html_content: str, reply_to: Optional[str] = None):
     """Send email via SendGrid"""
     try:
         message = Mail(
             from_email=Email(INBOX_EMAIL, name="Mifzal"),
-            to_emails=To(to_email),
+            to_emails=to_emails,  # supports list
             subject=subject,
             html_content=Content("text/html", html_content)
         )
@@ -200,9 +199,9 @@ def send_email(to_email: str, subject: str, html_content: str, reply_to: Optiona
 
         sg = SendGridAPIClient(SENDGRID_API_KEY)
         response = sg.send(message)
-        logger.info(f"Email sent to {to_email}, status code: {response.status_code}")
+        logger.info(f"Email sent to {to_emails}, status code: {response.status_code}")
     except Exception as e:
-        logger.error(f"Failed to send email to {to_email}: {str(e)}")
+        logger.error(f"Failed to send email to {to_emails}: {str(e)}")
         raise e
 
 # ----------------------------
@@ -223,22 +222,20 @@ async def handle_contact(request: Request, is_epk: bool = False):
         error_msg = e.errors()[0]['msg'] if e.errors() else "Validation failed"
         raise HTTPException(status_code=422, detail=error_msg)
 
-    # Auto-reply email
+    # Auto-reply email (goes to submitter + inbox in one thread)
     auto_subject, auto_html = create_email_template(
         form_data.name, form_data.email, form_data.message, is_epk
     )
     try:
-        send_email(form_data.email, auto_subject, auto_html)
+        send_email(
+            [form_data.email, INBOX_EMAIL],  # both recipients
+            auto_subject,
+            auto_html,
+            reply_to=form_data.email
+        )
     except Exception:
-        raise HTTPException(status_code=500, detail="Failed to send confirmation email to user")
+        raise HTTPException(status_code=500, detail="Failed to send confirmation email")
 
-    # Copy to inbox with reply-to
-    try:
-        send_email(INBOX_EMAIL, f"📩 Copy of : {auto_subject}", auto_html, reply_to=form_data.email)
-    except Exception:
-        raise HTTPException(status_code=500, detail="Failed to send copy to inbox")
-
-    
     # Internal notification (send to both main inbox + Gmail)
     notif_subject, notif_html = create_simple_notification(
         form_data.name, form_data.email, is_epk
@@ -248,7 +245,6 @@ async def handle_contact(request: Request, is_epk: bool = False):
             send_email(recipient, notif_subject, notif_html)
         except Exception:
             raise HTTPException(status_code=500, detail=f"Failed to send inbox notification to {recipient}")
-
 
     return {
         "success": True,
