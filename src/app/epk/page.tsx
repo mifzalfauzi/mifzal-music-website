@@ -115,7 +115,7 @@ export default function EPK() {
       <div className="min-h-screen bg-background flex flex-col justify-center items-center">
         <div className="max-w-md mx-auto text-center">
           <h2 className="text-2xl font-light mb-6 tracking-wider text-red-500">MESSAGE FAILED</h2>
-          <p className="text-muted-foreground mb-8">Something went wrong. Please try again or contact me directly at mifzalmusic@gmail.com</p>
+          <p className="text-muted-foreground mb-8">Something went wrong. Please try again or contact me directly at contact@mifzal.co</p>
           <button
             onClick={() => setError(false)}
             className="cursor-pointer bg-white text-black px-6 py-2 rounded hover:bg-black hover:text-white transition-colors border border-black"
@@ -436,13 +436,13 @@ export default function EPK() {
               <Mail className="w-4 h-4 md:w-5 md:h-5 text-foreground" />
              
               <a
-                href="mailto:mifzalmusic@gmail.com"
+                href="mailto:contact@mifzal.co"
                 className="text-muted-foreground hover:text-primary transition-colors text-sm md:text-base"
               >
-                mifzalmusic@gmail.com
+                contact@mifzal.co
               </a>
               <button
-                onClick={() => copyToClipboard('mifzalmusic@gmail.com')}
+                onClick={() => copyToClipboard('contact@mifzal.co')}
                 className={`transition-colors text-sm md:text-base cursor-pointer ${
                   copied 
                     ? 'text-green-500' 
