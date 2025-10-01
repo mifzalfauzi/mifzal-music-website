@@ -12,7 +12,7 @@ const musicReleases = [
     title: "Intervallum",
     type: "Single",
     year: "2023",
-    cover: "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02a095dbc29c017745bcb14714  ",
+    cover: "/intervallum.jpg",
     spotifyUrl: "https://open.spotify.com/",
     appleMusicUrl: "https://music.apple.com/",
     bandcampUrl: "",
